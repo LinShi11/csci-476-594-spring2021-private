@@ -1,9 +1,9 @@
-## Name: Lin Shi (n92s773)
-## Course: CSCI 476
-## Email: linshi1768@gmail.com
+### Name: Lin Shi (n92s773)
+### Course: CSCI 476
+### Email: linshi1768@gmail.com
 
-### lab00
-### January 19, 2021
+#### lab00
+#### January 19, 2021
 
 1. ![](Questionnaire.PNG)
 2. ![](UbuntuSetUp&Run.PNG)
