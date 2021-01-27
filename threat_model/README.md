@@ -10,7 +10,7 @@
 <br>
 I have gone with a scenario-based combined with asset-centric brainstorming exercise. I was thinking about the different scenarios in which the thieve could access the assets on the computer or computer itself while using an Attack-Tree-like chart to demonstrate my ideas. <br>
 <br>
-_(Same information as the chart but with some explanations)_:<br>
+_(Same information as the chart but with some explanations)_ :<br>
 <br>
 Given that your laptop was stolen when you stepped away and the thieve is planning on doing some harm to you or your computer. Here is the Threat Model: <br>
 If they are interested in the computer itself, you could have lost the computer. If they just wish to make your week depressing, you might find your computer broken (or maybe due to frustration when trying to get in?). <br>
