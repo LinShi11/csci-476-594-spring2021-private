@@ -7,6 +7,7 @@
 #### January 26, 2021
 
 1. ![](Brainstorm.PNG)
+*The red words are the outcomes, color-coded so it is easier to read*
 
 I have gone with a **scenario-based** combined with **asset-centric** brainstorming exercise. I was thinking about the different scenarios in which the thieve could access the assets on the computer or computer itself while using an Attack-Tree-like chart to demonstrate my ideas.
 
