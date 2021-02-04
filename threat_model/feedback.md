@@ -1,0 +1,3 @@
+- Looks good!
+- Please check how your final `README.md` renders on GitHub - some of the formatting is off.
+- You did a really nice job identifying threats. A great next step is to enumerate the countermeasures/defenses that you know of to defend again (or at least mitigate) the potential damage from the threats you identified.
