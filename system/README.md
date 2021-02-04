@@ -15,7 +15,7 @@
 - Data segment have the initialized global data. For example, if you define a variable to be something.
 - Text segment includes the instructions. It contains portion of an object file or the corresponding section of the program's address space that contains the executable instructions.
 
-3. Code will be the instructions in which the hardware executes and the data is the information that the program uses to carry out those instruction. Additionally, you would not want to change or write to your code; however, you do want to write values, which is the data. Therefore, there must be a distinction between the code and the data.
+3. Code will be the instructions in which the hardware executes and the data is the information that the program uses to carry out those instruction. Additionally, you would not want to change or write to your code after it has been converted to instruction; however, you do want to write values, which is the data. Therefore, there must be a distinction between the code and the data.
 
 4. Some threats that seems obvious after learning about the memory are stack overflow and heap overflow, the two types of buffer overflow. Where either the stack or the heap is going into the space of Memory Mapping Segment.
 
