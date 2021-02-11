@@ -35,7 +35,7 @@ seed
 When running the printenv command, it displays all the environment variables saved. For example, the USER is seed, the HOME is home/seed, PWD will show me a path to my current location, SESSION_MANAGER will display a list of network IDs. Additionally, even a environment variable I included in later task LD_PRELOAD will appear here (I deleted it to display the corresponding variables if I ran printenv for the first time). I have only shown part of the list. For all the printed details, please look at [printenv_before.txt](task1/printenv_before.txt).
 
 #### Task 1.2:
-In this task I have included export and unset. I understand how export and the action of set could be combine into: export NAME='Lin'; however, I decided to split them so it is easier for me to understand later.
+In this task I have included export and unset. I understand how export and the action of set could be combine into: export NAME=LIN; however, I decided to split them so it is easier for me to understand later.
 ```
 [02/10/21]seed@VM:~/.../task1$ printenv NAME
 [02/10/21]seed@VM:~/.../task1$ NAME=Lin
@@ -66,7 +66,7 @@ _=/usr/bin/printenv
 [02/10/21]seed@VM:~/.../task1$ unset NAME
 [02/10/21]seed@VM:~/.../task1$ printenv NAME
 ```
-First, I double checked to make sure NAME is not set to anything using printenv NAME. Then I set the NAME using NAME='Lin'. However, if I do not export the variable, it is still not stored as a environment variable; thus, I need to do export NAME. When I do printenv NAME, my name will appear. Additionally, if I do printenv, NAME will appear in the output as well. Furthermore, using the unset NAME will unset the variable, just like deleting the varaible. For all the output, please look at [myprintenv_after.txt](task1/printenv_after.txt)
+First, I double checked to make sure NAME is not set to anything using printenv NAME. Then I set the NAME using NAME=LIN. However, if I do not export the variable, it is still not stored as a environment variable; thus, I need to do export NAME. When I do printenv NAME, my name will appear. Additionally, if I do printenv, NAME will appear in the output as well. Furthermore, using the unset NAME will unset the variable, just like deleting the varaible. For all the output, please look at [printenv_after.txt](task1/printenv_after.txt)
 
 ### Task 2:
 
@@ -93,7 +93,7 @@ DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 OLDPWD=/home/seed/Desktop/lab01
 _=./myprintenv
 ```
-After running the myprintenv program, I could see that it is almost identical to printenv command. The only differences are in the program we ran and the path since I create a different file (_ and PWD). I have only shown some of the environment variable, for all the information, please look at [myenv1.txt](task2/myenv1.txt)
+After running the myprintenv program, I could see that it is almost identical to printenv command. The only differences are in the program we ran and the path since I create a different file (_ and PWD). I have only shown some of the environment variable, for all the output, please look at [myenv1.txt](task2/myenv1.txt)
 
 #### Task 2.2:
 In this task, I commented out the printenv() in the child process and uncommented the printenv() in the parent process. Then I recompile and ran the program.
@@ -167,7 +167,7 @@ _=./myenv_execve
 When we ran it with environ, we have all the environment variables when printing printenv. In fact, I ran a diff command to find out the only difference is the program ran, which we discussed is a result of the program or command ran. For complete output, please look at [myenv_execve.txt](task3/myenv_execve.txt).
 
 #### Task 3.3:
-While I had a good idea of where the environment varaible came from with the discussion above about envp (environment variable), I cannot be sure until I look at environ, the only modification we did to Task 3.2. Since "environ variable is an array of character strings containing environment variable and their values in the form name=value" [citation](https://www.mkssoftware.com/docs/man5/environ.5.asp#:~:text=The%20environ%20variable%20is%20an,of%20.). We have passed in all the environment varaible as the envp, which is the third argument of execve(). Therefore, the environment is inherited through what has been passed in as the environment variable pointer.
+While I had a good idea of where the environment varaible came from with the discussion above about envp (environment variable), I cannot be sure until I look at environ, the only modification we did to Task 3.2. Since "environ variable is an array of character strings containing environment variable and their values in the form name=value" ([citation](https://www.mkssoftware.com/docs/man5/environ.5.asp#:~:text=The%20environ%20variable%20is%20an,of%20.)). We have passed in all the environment varaible as the envp, which is the third argument of execve(). Therefore, the environment is inherited through what has been passed in as the environment variable pointer.
 
 ### Task 4:
 
@@ -272,7 +272,7 @@ SUDO_UID=1000
 MAIL=/var/mail/root
 _=./myenv_environ
 ```
-In this task, we made the program to a Set-UID program by running the two sudo commands given to us. Then I decided to run the program, which I could conclude that changing it to Set-UID program does not affect the environment variables. Then, out of curiosity, I decided to run the same program with root. Which is outputting the environment variables associated with root. For example, its HOME=/root. [user seed](task5/myenv_environ2.txt), [root](task5/myenv_environ3.txt).
+In this task, we made the program to a Set-UID program by running the two sudo commands given to us. Then I decided to run the program, which I could conclude that changing it to Set-UID program does not affect the environment variables. Then, out of curiosity, I decided to run the same program with root. Which is outputting the environment variables associated with root. For example, its HOME=/root. This is the above seed output: [user seed](task5/myenv_environ2.txt), above root output: [root](task5/myenv_environ3.txt).
 
 #### Task 5.3:
 
