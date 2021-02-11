@@ -6,7 +6,8 @@
 <br>
 
 ### Task 1:
-##### Task 1.1:
+
+#### Task 1.1:
 I ran the printenv command to print out all the environment variables. Additionally, I used the printenc USER to show the information stored in the environment variable USER. The following are part of the environment variables:
 ```
 [02/10/21]seed@VM:~/.../task1$ printenv > printenv_before.txt
@@ -33,9 +34,9 @@ seed
 ```
 When running the printenv command, it displays all the environment variables saved. For example, the USER is seed, the HOME is home/seed, PWD will show me a path to my current location, SESSION_MANAGER will display a list of network IDs. Additionally, even a environment variable I included in later task LD_PRELOAD will appear here (I deleted it to display the corresponding variables if I ran printenv for the first time).
 
-I have only shown part of the list. For all the printed details, please look at [printenv_before.txt]("task1/printenv_before.txt").
+I have only shown part of the list. For all the printed details, please look at [printenv_before.txt](task1/printenv_before.txt).
 
-##### Task 1.2:
+#### Task 1.2:
 In this task I have included export and unset. I understand how export and the action of set could be combine into: export NAME='Lin'; however, I decided to split them so it is easier for me to understand later.
 ```
 [02/10/21]seed@VM:~/.../task1$ printenv NAME
@@ -67,10 +68,11 @@ _=/usr/bin/printenv
 [02/10/21]seed@VM:~/.../task1$ unset NAME
 [02/10/21]seed@VM:~/.../task1$ printenv NAME
 ```
-First, I double checked to make sure NAME is not set to anything using printenv NAME. Then I set the NAME using NAME='Lin'. However, if I do not export the variable, it is still not stored as a environment variable; thus, I need to do export NAME. When I do printenv NAME, my name will appear. Additionally, if I do printenv, NAME will appear in the output as well. Furthermore, using the unset NAME will unset the variable, just like deleting the varaible. For all the output, please look at [myprintenv_after.txt]("task1/myprintenv_after.txt")
+First, I double checked to make sure NAME is not set to anything using printenv NAME. Then I set the NAME using NAME='Lin'. However, if I do not export the variable, it is still not stored as a environment variable; thus, I need to do export NAME. When I do printenv NAME, my name will appear. Additionally, if I do printenv, NAME will appear in the output as well. Furthermore, using the unset NAME will unset the variable, just like deleting the varaible. For all the output, please look at [myprintenv_after.txt](task1/myprintenv_after.txt)
 
 ### Task 2:
-##### Task 2.1:
+
+#### Task 2.1:
 In this task, we are running the program first for the printenv information.
 ```
 [02/11/21]seed@VM:~/.../task2$ gcc myprintenv.c -o myprintenv
@@ -93,9 +95,9 @@ DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 OLDPWD=/home/seed/Desktop/lab01
 _=./myprintenv
 ```
-After running the myprintenv program, I could see that it is almost identical to printenv command. The only differences are in the program we ran and the path since I create a different file (_ and PWD). I have only shown some of the environment variable, for all the information, please look at [myenv1.txt]("task2/myenv1.txt")
+After running the myprintenv program, I could see that it is almost identical to printenv command. The only differences are in the program we ran and the path since I create a different file (_ and PWD). I have only shown some of the environment variable, for all the information, please look at [myenv1.txt](task2/myenv1.txt)
 
-##### Task 2.2:
+#### Task 2.2:
 In this task, I commented out the printenv() in the child process and uncommented the printenv() in the parent process. Then I recompile and ran the program.
 ```
 [02/11/21]seed@VM:~/.../task2$ gcc myprintenv.c -o myprintenv
@@ -120,9 +122,9 @@ DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 OLDPWD=/home/seed/Desktop/lab01
 _=./myprintenv
 ```
-After running the program, I think the two program output is identical at first glance. Which makes perfect sense since a child process will inherit all environment variables from its parent. At fork, the child process will create a separate copy of all the data and a separate program counter. However, since child is **copying** the data, its environment variables should be identical. Again, for the full output, [myenv2.txt]("task2/myenv2.txt").
+After running the program, I think the two program output is identical at first glance. Which makes perfect sense since a child process will inherit all environment variables from its parent. At fork, the child process will create a separate copy of all the data and a separate program counter. However, since child is **copying** the data, its environment variables should be identical. Again, for the full output, [myenv2.txt](task2/myenv2.txt).
 
-##### Task 2.3:
+#### Task 2.3:
 We are running the diff command to ensure that the output of the child and parent process is identical.
 ```
 [02/11/21]seed@VM:~/.../task2$ diff myenv1.txt myenv2.txt
@@ -130,7 +132,8 @@ We are running the diff command to ensure that the output of the child and paren
 After running the diff command, there is not any output, which means that there are no differences between the parent and child process. Since the child is copying (fork) the parent, all of its environment variables should be identical. After some research online, some differences between the child and parent process are different PIDs (proportional integral derivative), separate copy of the data and program counter, and the two processes do not share variable after fork.
 
 ### Task 3:
-##### Task 3.1:
+
+#### Task 3.1:
 envp is an array of strings, conventionally of the form key-value, which are passed as environment to the new program
 main is defined as int main(int argc, char *argv[], char *envp[]) envp environment pointer
 We are running the the command execve with NULL in place of a envp (environment pointer).
@@ -140,7 +143,7 @@ We are running the the command execve with NULL in place of a envp (environment 
 ```
 Nothing was displayed for the program. Based on man execve, it should be int execve(const char *pathname, char *const argv[], char *const envp[]). envp, the portion we are most interested in is an array of strings, which are passed as environment to the new program. As we look at the program, we have given it the path and array of argument strings (although it is NULL), the environment pointer (envp) is stated to be NULL. Thus, it does not know what environment the program is referring to. Which resulted in a blank output.
 
-##### Task 3.2:
+#### Task 3.2:
 This time, we are running the program with environment pointer as environ, not NULL:
 ```
 [02/11/21]seed@VM:~/.../task3$ gcc myenv_execve.c -o myenv_execve
@@ -165,11 +168,12 @@ _=./myenv_execve
 ```
 When we ran it with environ, we have all the environment variables when printing printenv. In fact, I ran a diff command to find out the only difference is the program ran, which we discussed is a result of the program or command ran. For complete output, please look at [myenv_execve.txt](task3/myenv_execve.txt).
 
-##### Task 3.3:
+#### Task 3.3:
 While I had a good idea of where the environment varaible came from with the discussion above about envp (environment variable), I cannot be sure until I look at environ, the only modification we did to Task 3.2. Since "environ variable is an array of character strings containing environment variable and their values in the form name=value" [citation](https://www.mkssoftware.com/docs/man5/environ.5.asp#:~:text=The%20environ%20variable%20is%20an,of%20.). We have passed in all the environment varaible as the envp, which is the third argument of execve(). Therefore, the environment is inherited through what has been passed in as the environment variable pointer.
 
 ### Task 4:
-##### Task 4.1:
+
+#### Task 4.1:
 
 ```
 [02/11/21]seed@VM:~/.../task4$ gcc myenv_system.c -o myenv_system
@@ -192,11 +196,11 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/us
 OLDPWD=/home/seed/Desktop/lab01/task4
 _=/usr/bin/env
 ```
-The output is still displaying the same information as printenv. If we look at the program, it is calling env in /usr/bin, which based on the Task 1 and some test, displays the same information as printenv. Therefore, having the same output is not surprising at all. For the complete output, please look at [myenv_system]("task4/myenv_system.txt").
+The output is still displaying the same information as printenv. If we look at the program, it is calling env in /usr/bin, which based on the Task 1 and some test, displays the same information as printenv. Therefore, having the same output is not surprising at all. For the complete output, please look at [myenv_system](task4/myenv_system.txt).
 
 ### Task 5:
 
-##### Task 5.1:
+#### Task 5.1:
 ```
 [02/11/21]seed@VM:~/.../task5$ gcc myenv_environ.c -o myenv_environ
 [02/11/21]seed@VM:~/.../task5$ ./myenv_environ > myenv_environ1.txt
@@ -218,9 +222,9 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/us
 OLDPWD=/home/seed/Desktop/lab01
 _=./myenv_environ
 ```
-All the environment variables were inherited in the program when first ran by the user (seed). As we can use the USERNAME=seed. Aside from the program ran, there is no difference when compare to the output of printenv. If we look at the code, we are just iterate through environ, which is a list of environment variables; thus, it should be the same as printenv. For the complete output: [myenv_environ1.txt]("task5/myenv_environ1.txt").
+All the environment variables were inherited in the program when first ran by the user (seed). As we can use the USERNAME=seed. Aside from the program ran, there is no difference when compare to the output of printenv. If we look at the code, we are just iterate through environ, which is a list of environment variables; thus, it should be the same as printenv. For the complete output: [myenv_environ1.txt](task5/myenv_environ1.txt).
 
-##### Task 5.2:
+#### Task 5.2:
 
 We are changing the ownership to root and make it a Set-UID program
 ```
@@ -270,9 +274,9 @@ SUDO_UID=1000
 MAIL=/var/mail/root
 _=./myenv_environ
 ```
-In this task, we made the program to a Set-UID program by running the two sudo commands given to us. Then I decided to run the program, which I could conclude that changing it to Set-UID program does not affect the environment variables. Then, out of curiosity, I decided to run the same program with root. Which is outputting the environment variables associated with root. For example, its HOME=/root. [user seed]("task5/myenv_environ2.txt"), [root]("task5/myenv_environ3.txt").
+In this task, we made the program to a Set-UID program by running the two sudo commands given to us. Then I decided to run the program, which I could conclude that changing it to Set-UID program does not affect the environment variables. Then, out of curiosity, I decided to run the same program with root. Which is outputting the environment variables associated with root. For example, its HOME=/root. [user seed](task5/myenv_environ2.txt), [root](task5/myenv_environ3.txt).
 
-##### Task 5.3:
+#### Task 5.3:
 
 In this task, we are modifying the PATH, LD_LIBRARY_PATH, and TASK5 and determine whether that will be inherited in the child process.
 ```
@@ -323,7 +327,7 @@ The program does run my fake ls code instead of the /bin/ls. By compiling the fa
 
 ### Task 7:
 
-##### Task 7.1:
+#### Task 7.1:
 We are just following the steps to execute the program.
 ```
 [02/11/21]seed@VM:~/.../task7$ gcc  -fPIC -g -c mylib.c
@@ -335,7 +339,7 @@ I'm not sleeping!
 ```
 We could see how we have dynamically linked the library and it is going to run it first. Additionally, by browsing online, I discovered that LD_PRELOAD is used to exploit functionality by providing the dynamic linker on Unix systems. Therefore, it is important for us to declare LD_PRELOAD.
 
-##### Task 7.2:
+#### Task 7.2:
 
 1. This is running the regular program with regular user.
 ```
@@ -389,14 +393,14 @@ I'm not sleeping!
 ```
 I was a little unsure whether the new user temp could be the owner; thus, I tried both. The program will still not inherit LD_PRELOAD while in the new temp user. Once I export LD_PRELOAD, it works just fine. Overall, in this task, we have observe that not all environment variables are inherited. For example, LD_ environment variables are not.
 
-##### Task 7.3
+#### Task 7.3
 The main cause of the difference when running this program is the LD_PRELOAD environment variable. It is special since it could be used to dynamically link libraries to the program; thus, changing the behavior of our program. Additionally, since LD_ environment variables are not inherited, it must be reexported every time we use a new user or change the regular program to be a Set-UID program. Overall, the main cause of the different result is LD_PRELOAD.
 
 ### Task 8:
 
 The two files that I used to test were: [readFile](task8/readFile.txt) and [deleteFile](task8/deleteFile.txt).
 
-##### Task 8.1:
+#### Task 8.1:
 We are trying to delete a file in which Bob should have no access to delete through system call.
 ```
 [02/11/21]seed@VM:~/.../task8$ vim readFile.txt
@@ -411,7 +415,7 @@ catall  catall.c  readFile.txt
 ```
 When the system command is call and "readFile.txt; rm deleteFile.txt" is passed in, it will break it up into two different command because of the colon. On the other hand, rm is not one of the privilege; however, since we are in system, once it break the string up, it will call rm to remove the deleteFile.txt. This is gives Bob far more power than Vince expected.
 
-##### Task 8.2:
+#### Task 8.2:
 Try the same attack with execve().
 ```
 [02/11/21]seed@VM:~/.../task8$ touch deleteFile.txt
