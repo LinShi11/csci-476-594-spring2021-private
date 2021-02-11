@@ -163,7 +163,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/us
 OLDPWD=/home/seed/Desktop/lab01
 _=./myenv_execve
 ```
-When we ran it with environ, we have all the environment variables when printing printenv. In fact, I ran a diff command to find out the only difference is the program ran, which we discussed is a result of the program or command ran. For complete output, please look at [myenv_execve.txt]("task3/myenv_execve.txt").
+When we ran it with environ, we have all the environment variables when printing printenv. In fact, I ran a diff command to find out the only difference is the program ran, which we discussed is a result of the program or command ran. For complete output, please look at [myenv_execve.txt](task3/myenv_execve.txt).
 
 ##### Task 3.3:
 While I had a good idea of where the environment varaible came from with the discussion above about envp (environment variable), I cannot be sure until I look at environ, the only modification we did to Task 3.2. Since "environ variable is an array of character strings containing environment variable and their values in the form name=value" [citation](https://www.mkssoftware.com/docs/man5/environ.5.asp#:~:text=The%20environ%20variable%20is%20an,of%20.). We have passed in all the environment varaible as the envp, which is the third argument of execve(). Therefore, the environment is inherited through what has been passed in as the environment variable pointer.
