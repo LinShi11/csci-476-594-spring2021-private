@@ -32,9 +32,7 @@ OLDPWD=/home/seed/Desktop/lab01
 [02/10/21]seed@VM:~/.../task1$ printenv USER
 seed
 ```
-When running the printenv command, it displays all the environment variables saved. For example, the USER is seed, the HOME is home/seed, PWD will show me a path to my current location, SESSION_MANAGER will display a list of network IDs. Additionally, even a environment variable I included in later task LD_PRELOAD will appear here (I deleted it to display the corresponding variables if I ran printenv for the first time).
-
-I have only shown part of the list. For all the printed details, please look at [printenv_before.txt](task1/printenv_before.txt).
+When running the printenv command, it displays all the environment variables saved. For example, the USER is seed, the HOME is home/seed, PWD will show me a path to my current location, SESSION_MANAGER will display a list of network IDs. Additionally, even a environment variable I included in later task LD_PRELOAD will appear here (I deleted it to display the corresponding variables if I ran printenv for the first time). I have only shown part of the list. For all the printed details, please look at [printenv_before.txt](task1/printenv_before.txt).
 
 #### Task 1.2:
 In this task I have included export and unset. I understand how export and the action of set could be combine into: export NAME='Lin'; however, I decided to split them so it is easier for me to understand later.
@@ -68,7 +66,7 @@ _=/usr/bin/printenv
 [02/10/21]seed@VM:~/.../task1$ unset NAME
 [02/10/21]seed@VM:~/.../task1$ printenv NAME
 ```
-First, I double checked to make sure NAME is not set to anything using printenv NAME. Then I set the NAME using NAME='Lin'. However, if I do not export the variable, it is still not stored as a environment variable; thus, I need to do export NAME. When I do printenv NAME, my name will appear. Additionally, if I do printenv, NAME will appear in the output as well. Furthermore, using the unset NAME will unset the variable, just like deleting the varaible. For all the output, please look at [myprintenv_after.txt](task1/myprintenv_after.txt)
+First, I double checked to make sure NAME is not set to anything using printenv NAME. Then I set the NAME using NAME='Lin'. However, if I do not export the variable, it is still not stored as a environment variable; thus, I need to do export NAME. When I do printenv NAME, my name will appear. Additionally, if I do printenv, NAME will appear in the output as well. Furthermore, using the unset NAME will unset the variable, just like deleting the varaible. For all the output, please look at [myprintenv_after.txt](task1/printenv_after.txt)
 
 ### Task 2:
 
