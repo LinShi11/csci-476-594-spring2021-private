@@ -1,8 +1,8 @@
-## lab01
+## Lab02
 ###### Lin Shi (n92s773)
 ###### linshi1768@gmail.com
 ###### CSCI 476
-###### February 9, 2021
+###### February 16, 2021
 <br>
 
 Before the tasks, I followed the environment setup and completed every comment and they all work on my machine; thus, I continued.
@@ -10,7 +10,7 @@ Before the tasks, I followed the environment setup and completed every comment a
 
 #### Task 1.1:
 
-This is a simple test to see if /bin/bash_shellshock is vulnerable to the Shellshock attack. We are defining the variable foo; however, we have included some extra after the declaration, **echo "attack";**. By having this in the quotation, if /bin/bash_shellshock print out attack, we will know it is vulnerable to Shellshock attack.
+This is a simple test to see if /bin/bash_shellshock is vulnerable to the Shellshock attack. We are defining the function foo; however, we have included some extra code after the declaration, **echo "attack";**. By having this in the quotation, if /bin/bash_shellshock print out attack, we will know it is vulnerable to Shellshock attack.
 ```
 [02/15/21]seed@VM:~/.../image_www$ export PS1='parent:>'                                 
 parent:>foo='() { echo "normal function"; }; echo "attack";'  
@@ -24,7 +24,7 @@ foo ()
 }
 ```
 
-After testing /bin/bash_shellshock, I would like to verify with /bin/bash, the one that supose to be patched and not vulnerable.
+After testing /bin/bash_shellshock, I would like to verify it with /bin/bash, the one that suppose to be patched and not vulnerable.
 ```
 [02/15/21]seed@VM:~/.../image_www$ export PS1='parent:>'
 parent:>foo='() { echo "normal function"; }; echo "attack";'
@@ -34,21 +34,21 @@ parent:>/bin/bash
 () { echo "normal function" }
 ```
 
-Overall, I ran some basic commands with echo "attack", the extra part, after the declaration to prove the a bash's vulnerability. After running both the /bin/bash_shellshock and /bin/bash, we can verify that /bin/bash_shellshock is vulnerable to shellshock attack. Once we declared and export foo, when we call bash_shellshock, (I was located in the directory, so I did not need to navigate to it), it **printed attack**. On the other hand, when we called /bin/bash, nothing was printed. Thus, proving that it is not vulnerable.
+Overall, I ran some basic commands with echo "string" after the declaration to prove the a bash's vulnerability. After running both the /bin/bash_shellshock and /bin/bash, we can verify that /bin/bash_shellshock is vulnerable to shellshock attack. Once we declared and export foo, when we call bash_shellshock, (I was located in the directory, so I did not need to navigate to it), it **printed attack**. On the other hand, when we called /bin/bash, nothing was printed. Thus, proving that it is not vulnerable.
 
 ### Task 2:
 
 #### Task 2.1:
 
-In this task, I am trying to use the browser to access http://www.seedlab-shellshock.com/cgi-bin/getenv.cgi. I soon realize after a few failed attempts that it does not have a **.** in the end.
-[Task2.1](urlOutput.png)
+In this task, I am trying to use the browser to access http://<i></i>www.seedlab-shellshock.com/cgi-bin/getenv.cgi. I soon realize after a few failed attempts that it does not have a **.** in the end.
+[Task2.1]("urlOutput.png")
 
-Additionally, I decided to just run curl http://www.seedlab-shellshock.com/cgi-bin/getenv.cgi to compare both the url and the commands in Task 2.2.
+Additionally, I decided to just run curl http://<i></i>www.seedlab-shellshock.com/cgi-bin/getenv.cgi to compare both the url and the commands in Task 2.2.
 ```
 [02/15/21]seed@VM:~/.../02_shellshock$ curl http://www.seedlab-shellshock.com/cgi-bin/getenv.cgi
 ```
 
-This is what we got for an output:
+This is what I got for an output:
 ```
 *** ENVIRONMENT VARIABLES***
 HTTP_HOST=www.seedlab-shellshock.com
@@ -80,7 +80,7 @@ REQUEST_URI=/cgi-bin/getenv.cgi
 SCRIPT_NAME=/cgi-bin/getenv.cgi
 ```
 
-In conclusion, the output from the URL and the command is identical, which is a no-brainer, since they are both running the same thing. With more research, I figured out that curl is a command-line utility for transferring data from or to a server. From the environment set up, I understood how the victim is the server that we are trying to attack; thus, everything makes more sense about the curl command and the URL action. Since the getenv.cgi program prints out the environ; thus, it will display every environment variable to either the screen or server. I did notice that many of the environment variables are HTTP_<something> and SERVER_<something>. Going back to Networks, I believe it has been saved to send the proper HTML to the server.
+In conclusion, the output from the URL and the command is identical, which is a no-brainer, since they are both running the same thing. With more research, I figured out that curl is a command-line utility for transferring data from or to a server. From the environment set-up above, I understood how the victim is the server that we are trying to attack; thus, everything makes more sense about the curl command and the URL action. Since the getenv.cgi program prints out the environ, it will display every environment variable to either the screen or server. I did notice that many of the environment variables are HTTP_<something> and SERVER_<something>. Going back to Networks, I believe it has been saved to send the proper HTML to the server.
 
 #### Task 2.2:
 
@@ -129,7 +129,7 @@ REQUEST_URI=/cgi-bin/getenv.cgi
 SCRIPT_NAME=/cgi-bin/getenv.cgi
 * Connection #0 to host www.seedlab-shellshock.com left intact
 ```
-Comparing with the output from curl <URL>, it is clear how it included some extra information. After reading the man page, -v stands for --version and it is displaying information about the curl and the libcurl version it used.
+Comparing with the output from curl http://<i></i>www.seedlab-shellshock.com/cgi-bin/getenv.cgi, it is clear how it included some extra information. After reading the man page, -v stands for --version and it is displaying information about the curl and the libcurl version it used.
 
 
 2. Running with -A
@@ -707,4 +707,4 @@ QUERY_STRING=
 REQUEST_URI=/cgi-bin/getenv.cgi
 SCRIPT_NAME=/cgi-bin/getenv.cgi
 ```
-As we can see, task 4 has failed as well. Overall, we can see that we are running the actual getenv.cgi every time. Since the code asked for print the environ, that is our result. We have not gotten around it. Even after trying all curl options and doing something like task 4. However, it is also good to hear that such a vulnerable bug has been fixed and it was patched. In the end, it was very clear the difference between /bin/bash_shellshock and /bin/bash. 
+As we can see, task 4 has failed as well. Overall, we can see that we are running the actual getenv.cgi every time. Since the code asked for print the environ, that is our result. We have not gotten around it. Even after trying all curl options and doing something like task 4. However, it is also good to hear that such a vulnerable bug has been fixed and it was patched. In the end, it was very clear the difference between /bin/bash_shellshock and /bin/bash.
