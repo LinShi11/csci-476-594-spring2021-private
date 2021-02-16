@@ -228,7 +228,7 @@ SCRIPT_NAME=/cgi-bin/getenv.cgi
 * Connection #0 to host www.seedlab-shellshock.com left intact
 ```
 
--e will send the "Referer Page" information to the HTML server. Additionally, it will not keep the last -e if multiple of them are used.
+-e will send the "Referrer Page" information to the HTML server. Additionally, it will not keep the last -e if multiple of them are used.
 
 4. Running with -H:
 ```
@@ -280,7 +280,7 @@ SCRIPT_NAME=/cgi-bin/getenv.cgi
 
 -H will include extra headers in the request when sending the HTML to the server. Lastly, you can add as many headers as you would like.
 
-5. I believe that -A -H -e should all work to ejectt data into the environemnt variable of the CGI program. The only exception is -v because it only display the version name and we do not have the ability to add data to it. Then, both -H and -e is appending to something new with slight exception (talked about it above), but it both allow us to store the information as some kind of environment variable. Lastly, -A will modidy the USER_AGENT, which is stored as HTTP_USER_AGENT in the environemnt variable. Therefore, within the 4 operations given and shown to us, -A, -H, and -e should all work to eject data into the environment variables.  
+5. I believe that -A -H -e should all work to eject data into the environment variable of the CGI program. The only exception is -v because it only display the version name and we do not have the ability to add data to it. Then, both -H and -e is appending to something new with slight exception (talked about it above), but it both allow us to store the information as some kind of environment variable. Lastly, -A will modify the USER_AGENT, which is stored as HTTP_USER_AGENT in the environment variable. Therefore, within the 4 operations given and shown to us, -A, -H, and -e should all work to eject data into the environment variables.  
 
 ### Task 3:
 
