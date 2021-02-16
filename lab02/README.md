@@ -40,10 +40,10 @@ Overall, I ran some basic commands with echo "string" after the declaration to p
 
 #### Task 2.1:
 
-In this task, I am trying to use the browser to access http://<i></i>www.seedlab-shellshock.com/cgi-bin/getenv.cgi. I soon realize after a few failed attempts that it does not have a **.** in the end.
-[Task2.1]("urlOutput.png")
+In this task, I am trying to use the browser to access the server. I soon realize after a few failed attempts that it does not have a **.** in the end.
+![Task2.1](urlOutput.png)
 
-Additionally, I decided to just run curl http://<i></i>www.seedlab-shellshock.com/cgi-bin/getenv.cgi to compare both the url and the commands in Task 2.2.
+Additionally, I decided to just run curl to compare both the URL and the commands in Task 2.2.
 ```
 [02/15/21]seed@VM:~/.../02_shellshock$ curl http://www.seedlab-shellshock.com/cgi-bin/getenv.cgi
 ```
@@ -129,7 +129,7 @@ REQUEST_URI=/cgi-bin/getenv.cgi
 SCRIPT_NAME=/cgi-bin/getenv.cgi
 * Connection #0 to host www.seedlab-shellshock.com left intact
 ```
-Comparing with the output from curl http://<i></i>www.seedlab-shellshock.com/cgi-bin/getenv.cgi, it is clear how it included some extra information. After reading the man page, -v stands for --version and it is displaying information about the curl and the libcurl version it used.
+Comparing with the output from curl server, it is clear how it included some extra information. After reading the man page, -v stands for --version and it is displaying information about the curl and the libcurl version it used.
 
 
 2. Running with -A
