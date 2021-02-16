@@ -41,7 +41,7 @@ Overall, I ran some basic commands with echo "string" after the declaration to p
 #### Task 2.1:
 
 In this task, I am trying to use the browser to access the server. I soon realize after a few failed attempts that it does not have a **.** in the end.
-![Task2.1](urlOutput.png)
+![Task2.1](urlOuput.PNG)
 
 Additionally, I decided to just run curl to compare both the URL and the commands in Task 2.2.
 ```
