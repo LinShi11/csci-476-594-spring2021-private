@@ -70,7 +70,7 @@ First, I looked up the container id of the MySQL container. Then I navigate to t
 
 #### Task 2.1:
 For this task, we are trying to log in as admin without knowing his/her password:
-![Log in without password](Task2-1.png)
+![Log in without password](Task2-1.PNG)
 For this task, I looked at the SQL code and realized that the name is within single quotes and I also know that # is used for comments in SQL. Thus, I included admin'#. The SQL statement will think that it ended with the single quote and the rest of the code, where it asked for the correct password will be commented out. Therefore, as long as there exist a name of admin, we could log in.
 
 #### Task 2.2:
@@ -79,7 +79,7 @@ For this task, we are trying to log in as admin by command line and not use the 
 [03/09/21]seed@VM:~/.../lab04$ curl http://www.seedlabsqlinjection.com/unsafe_home.php?username=admin%27%23&password=
 ```
 I will use something very similar to before. Additionally, I used to URL Encoded Characters cheatsheet provided to us to determine the proper notation for single quote and #. Then I recieved a long html page, which I rendered and took a screen shot of the rendered page.
-![login using curl](Task2-2.png)
+![login using curl](Task2-2.PNG)
 As we can see, I have logged in as admin again. This time through the command line. The overall approach is just as Task 2.1; however, we included the proper notation for single quote and #. For full html page, [Task 2.2 html](Task2-2.html).
 
 #### Task 2.3:
@@ -88,7 +88,7 @@ For this task, we are trying to do two SQL statement at once:
 admin'; UPDATE credential SET nickname='Lin', WHERE name='admin'#
 ```
 I used the same start followed by ; and the second SQL statement that I want to execute.
-![Error Task 2.3](Task2-3.png)
+![Error Task 2.3](Task2-3.PNG)
 This time, I saw that it will flag the error for my second SQL statement. Since there is a countermeasure that prevents adding a UPDATE or DELETE statement to our original SQL statement, it makes perfect sense that it will flag our second statement.
 
 ### Task 3:
@@ -98,9 +98,9 @@ In this task, we are trying to modify a field that we should not have the abilit
 ```
 ', salary=1000000 WHERE name='Alice'#
 ```
-![input](Task3-1-1.png)
+![input](Task3-1-1.PNG)
 When I updated my profile, I found that:
-![output](Task3-1-2.png)
+![output](Task3-1-2.PNG)
 Alice's salary has been successfully changed to 1 million. When looking at the code, I could see that it was following the same format as above. Therefore, if I included the end single quote and comma followed by the field that I would like to modify I was able to change Alice's salary. Additionally, I found
 ```
 ', salary='1000000
@@ -112,9 +112,9 @@ This time, we are trying to modify the salary field of Samy. Therefore, I includ
 ```
 ', salary=1 WHERE name='Samy'#
 ```
-![input](Task3-2-1.png)
+![input](Task3-2-1.PNG)
 When I login as admin to look at everyone's salary, I found:
-![output](Task3-2-2.png)
+![output](Task3-2-2.PNG)
 Samy's salary is 1. Similar to our approach in Task 3.1, we are ending the nickname field and appending a salary field. However, this time, we must end with WHERE name='Samy'#. Since we are modifying another person's profile, we must change the default WHERE clause, which is defaulted to Alice. Thus by adding a new WHERE clause followed by #, it will take the new clause and everything else after # will be ignored. Therefore, we have modified Samy's salary.
 
 #### Task 3.3:
@@ -123,15 +123,15 @@ For this task, we are trying to change the Samy's password, we use the SHA1 hash
 ', password='a9993e364706816aba3e25717850c26c9cd0d89d' WHERE name='Samy'#
 ```
 ![hash](Task3-3-3.PNG)
-![input](Task3-3-1.png)
+![input](Task3-3-1.PNG)
 Then we can login with password abc:
-![output](Task3-3-2.png)
+![output](Task3-3-2.PNG)
 As we can see, I have logged into Samy's account using the password abc. Overall, our approach is very similar to above. Where we would close off the nickname field, append our password field and add what we want for the values, then close it off with a WHERE clause. Overall, I was able to change Samy's password and log back in as Samy.
 
 
 ### Task 4:
 For this task, we are trying to get a safer SQL through a prepared statement. First, I went to /defense and tested to make sure the vulnerability still exist:
-![with vuln](Task4-1.png)
+![with vuln](Task4-1.PNG)
 
 Then I went to the file and modified the php code to use prepared statement:
 ```
@@ -157,7 +157,7 @@ Creating mysql-10.9.0.6 ... done
 ```
 For the full output of the rebuild process, [rebuild](Task4.txt). Then I tried the same tactic using admin' # and I did not receive any output from the database.
 
-![no output](Task4-2.png)
+![no output](Task4-2.PNG)
 To verify that I did not just broken the program, I tried logging in normally as admin and I was successful.
-![output](Task4-3.png)
+![output](Task4-3.PNG)
 Overall, I understood how prepared statement helped define the boundaries of code and data more clearly. We would include all the necessary code and leave the data as ?. Then we would inject the appropriate data into their spots. Which is a great countermeasure against the SQL injection attack.
