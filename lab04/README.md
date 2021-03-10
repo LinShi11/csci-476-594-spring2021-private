@@ -3,12 +3,7 @@
 ###### linshi1768@gmail.com
 ###### CSCI 476
 ###### March 9, 2021
-
-
-
-
-
-
+<br>
 
 
 **Note: Since the url included what I typed in as username and password, I did not include any screenshots of my login page.**
