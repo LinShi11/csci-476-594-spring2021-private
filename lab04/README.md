@@ -3,7 +3,9 @@
 ###### linshi1768@gmail.com
 ###### CSCI 476
 ###### March 9, 2021
-<br>
+
+
+**Note: Since the url included what I typed in as username and password, I did not include any screenshots of my login page.**
 
 Before the tasks, I set up the environment by getting the container up:
 ```
@@ -13,7 +15,7 @@ Before the tasks, I set up the environment by getting the container up:
 ...
 ```
 
-**Note: Since the url included what I typed in as username and password, I did not include any screenshots of my login page.**
+
 
 ### Task 1:
 In this task, I am trying to get familiar with the SQL statements by running code in the container:
