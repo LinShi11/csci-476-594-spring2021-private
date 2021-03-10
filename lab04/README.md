@@ -13,6 +13,8 @@ Before the tasks, I set up the environment by getting the container up:
 ...
 ```
 
+**Note: Since the url included what I typed in as username and password, I did not include any screenshots of my login page.**
+
 ### Task 1:
 In this task, I am trying to get familiar with the SQL statements by running code in the container:
 ```
@@ -102,11 +104,7 @@ In this task, we are trying to modify a field that we should not have the abilit
 
 When it updated Alice's profile, I found that:
 ![output](Task3-1-2.PNG)
-Alice's salary has been successfully changed to 1 million. When looking at the code, I could see that it was following the same format as above. Therefore, if I included the end single quote and comma followed by the field that I would like to modify. I was able to change Alice's salary. Additionally, I found **', salary='1000000**
-```
-', salary='1000000
-```
-will also work just fine. This time, we are not ignoring everything else; instead, we are closing the nickname field and adding the salary field. In both approaches, we are just ending the nickname field and adding another field of salary, whether or not we choose to ignore everything else is totally optional since we are just modifying Alice's profile. Thus, as long as the format is fine, it will work.
+Alice's salary has been successfully changed to 1 million. When looking at the code, I could see that it was following the same format as above. Therefore, if I included the end single quote and comma followed by the field that I would like to modify. I was able to change Alice's salary. Additionally, I found **', salary='1000000** will work just fine. This time, we are not ignoring everything else; instead, we are closing the nickname field and adding the salary field. In both approaches, we are just ending the nickname field and adding another field of salary, whether or not we choose to ignore everything else is totally optional since we are just modifying Alice's profile. Thus, as long as the format is fine, it will work.
 
 #### Task 3.2:
 This time, we are trying to modify the salary field of Samy. Therefore, I included the following input to nickname:
