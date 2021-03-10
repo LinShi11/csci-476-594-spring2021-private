@@ -122,7 +122,7 @@ For this task, we are trying to change the Samy's password, we use the SHA1 hash
 ```
 ', password='a9993e364706816aba3e25717850c26c9cd0d89d' WHERE name='Samy'#
 ```
-![hash](Task3-3-3.png)
+![hash](Task3-3-3.PNG)
 ![input](Task3-3-1.png)
 Then we can login with password abc:
 ![output](Task3-3-2.png)
