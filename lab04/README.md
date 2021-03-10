@@ -64,7 +64,7 @@ mysql> SELECT * FROM credential WHERE Name='Alice';
 mysql>
 
 ```
-First, I looked up the container id of the MySQL container. Then I navigate to the container with docksh command. Once I am in the container, I logged in with the root username and password. Then with the show databases command I can see all the databases we have. Next, I "use" the sqllab_users to navigate to look at the sqllab_users. Then I use show tables to look at the tables that have been set up in sqllab_users. Then with SQL command "SELECT * FROM credential WHERE Name='Alice';", I can see all the information for Alice. The first task is just to get familiar with the SQL statements, for the full input [full input](Task1.txt).
+First, I looked up the container id of the MySQL container. Then I navigate to the container with docksh command. Once I am in the container, I logged in with the root username and password. Then with the show databases command I can see all the databases we have. Next, I "use" the sqllab_users to navigate to look at the sqllab_users. Then I use show tables to look at the tables that have been set up in sqllab_users. Then with SQL command "SELECT * FROM credential WHERE Name='Alice';", I can see all the information for Alice. The first task is just to get familiar with the SQL statements, for the [full input](Task1.txt).
 
 ### Task 2:
 
@@ -80,7 +80,7 @@ For this task, we are trying to log in as admin by command line and not use the 
 ```
 I will use something very similar to before. Additionally, I used to URL Encoded Characters cheatsheet provided to us to determine the proper notation for single quote and #. Then I recieved a long html page, which I rendered and took a screen shot of the rendered page.
 ![login using curl](Task2-2.PNG)
-As we can see, I have logged in as admin again. This time through the command line. The overall approach is just as Task 2.1; however, we included the proper notation for single quote and #. For full html page, [Task 2.2 html](Task2-2.html).
+As we can see, I have logged in as admin again. This time through the command line. The overall approach is just as Task 2.1; however, we included the proper notation for single quote and #. For full [html page](Task2-2.html).
 
 #### Task 2.3:
 For this task, we are trying to do two SQL statement at once:
@@ -143,7 +143,7 @@ $stmt->execute();
 $stmt->bind_result($id, $name, $eid, $salary, $ssn);
 $stmt->fetch();
 ```
-First, similar to the example given to us, I changed query into prepare. Then I replaced spots where the data should be included with ?. Then similar to the example, I bind the parameter with bind_param. However, since our data are both strings, it will be ss apposed to is. Next, I ask it to execute. Then the bind_result will add all the SELECTs we wish to accomplish, which are id, name, eid, salary, and ssn. Finally, I ask the program to fetch the information. Above are the portion that I modified. For the full php code, [code](unsafe.php)
+First, similar to the example given to us, I changed query into prepare. Then I replaced spots where the data should be included with ?. Then similar to the example, I bind the parameter with bind_param. However, since our data are both strings, it will be ss apposed to is. Next, I ask it to execute. Then the bind_result will add all the SELECTs we wish to accomplish, which are id, name, eid, salary, and ssn. Finally, I ask the program to fetch the information. Above are the portion that I modified. For the full php [code](unsafe.php)
 Then I shut down and rebuild my container:
 ```
 [03/09/21]seed@VM:~/.../lab04$ docker-compose down
@@ -155,7 +155,7 @@ Creating network "net-10.9.0.0" with the default driver
 Creating www-10.9.0.5   ... done
 Creating mysql-10.9.0.6 ... done
 ```
-For the full output of the rebuild process, [rebuild](Task4.txt). Then I tried the same tactic using admin' # and I did not receive any output from the database.
+For the full output of the [rebuild process](Task4.txt). Then I tried the same tactic using admin' # and I did not receive any output from the database.
 
 ![no output](Task4-2.PNG)
 To verify that I did not just broken the program, I tried logging in normally as admin and I was successful.
