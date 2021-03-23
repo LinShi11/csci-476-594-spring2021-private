@@ -1,0 +1,78 @@
+POST /action/profile/edit HTTP/1.1
+Host: www.xsslabelgg.com
+Content-Length: 2536
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: http://www.xsslabelgg.com
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarywTWFRbcqOckh4hVo
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://www.xsslabelgg.com/profile/samy/edit
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Cookie: Elgg=sir4peeb54gafb385vs1l6fnpt
+Connection: close
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="__elgg_token"
+hlaPgUV7HjfhLOIUsQfU1Q
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="__elgg_ts"
+1615410743
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="name"
+Samy
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="description"
+<p>This is a test</p>
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="accesslevel[description]"
+2
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="briefdescription"
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="accesslevel[briefdescription]"
+2
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="location"
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="accesslevel[location]"
+2
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="interests"
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="accesslevel[interests]"
+2
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="skills"
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="accesslevel[skills]"
+2
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="contactemail"
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="accesslevel[contactemail]"
+2
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="phone"
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="accesslevel[phone]"
+2
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="mobile"
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="accesslevel[mobile]"
+2
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="website"
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="accesslevel[website]"
+2
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="twitter"
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="accesslevel[twitter]"
+2
+------WebKitFormBoundarywTWFRbcqOckh4hVo
+Content-Disposition: form-data; name="guid"
+59
+------WebKitFormBoundarywTWFRbcqOckh4hVo--
