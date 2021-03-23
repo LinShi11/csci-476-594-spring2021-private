@@ -83,7 +83,7 @@ window.onload = function () {
 Then I made sure Samy and Alice are not friends. (To save a little space, I have provided the [Link](Task4-1-2.PNG) if you would like to see it)
 Next I searched for [Samy as Alice](Task4-1-3.png) and viewed [Samy's profile](Task4-1-4.PNG). When I go back to view Alice's friend list:
 
-![success](Tassk4-1-5.PNG)
+![success](Task4-1-5.PNG)
 We can see that Samy is a friend of Alice but Alice never had that request. When I logged in as Samy, I could see that Samy and Alice had made Samy a friend. Since we never said in the code that Samy should not add himeself as a friend, it happened when we viewed Samy's profile as Samy.
 
 ##### Task 4.2:
