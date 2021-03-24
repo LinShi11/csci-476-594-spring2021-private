@@ -2,20 +2,20 @@
 ###### Lin Shi (n92s773)
 ###### linshi1768@gmail.com
 ###### CSCI 476
-###### March 2, 2021
+###### March 23, 2021
 <br>
 
-
+**Note: To save space, I did not show all the screenshots, they are mostly verify before the attack. If you wish to check, please click the link; otherwise, it does not affect the input output of the attack.**
 ### Task 1:
-This task carries out a XSS attack by adding some javascript code in one's profile, I decided to use Alice for this:
+This task carries out a XSS attack by adding some JavaScript code in one's profile, I decided to use Alice for this:
 ![attack](Task1-1.PNG)
 
 After I saved the update, it is going to bring me to Alice's home page and I saw:
 ![success](Task1-2.PNG)
-This proves that our attack was success. On the other hand, I have tried many other spots to insert the javascript code. For example, if I just add the javascript code in About me, without going into the Edit HTML option, the attack was unsuccesful since that is being treated as a paragraph and characters like "<" and ">" has been converted. Spots such as the email require something in the form of an email; thus, it will not allow me to update it with a javascript code. Overall, I have carried out the attack in many different spots such as Brief description and About me (when I am under Edit HTML option).
+This proves that our attack was success. On the other hand, I have tried many other spots to insert the JavaScript code. For example, if I just add the JavaScript code in About me, without going into the Edit HTML option, the attack was unsuccessful since that is being treated as a paragraph and characters like "<" and ">" has been converted. Spots such as the email require something in the form of an email; thus, it will not allow me to update it with a JavaScript code. Overall, I have carried out the attack in many different spots such as Brief description and About me (when I am under Edit HTML option).
 
 ### Task 2:
-In this task, I am trying to carry out show that I could get the cookie information and not just a random popup that does not have any sensative informations:
+In this task, I am trying to carry out show that I could get the cookie information and not just a random popup that does not have any sensitive information:
 
 ![attack](Task2-1.PNG)
 
@@ -39,7 +39,7 @@ Accept-Encoding: gzip, deflate
 Connection: keep-alive
 Referer: http://www.xsslabelgg.com/profile/alice
 ```
-This time, the attacker, netcat, is waiting on port 5555 for the response. In our javascript code, we included a image tag that tells it to go the location, which is our local host this time, and in port 5555. However, the cookie information is passed to the location while Elgg request for the "image". Therefore, we have recieved the cookie infomation on the attack's end.
+This time, the attacker, netcat, is waiting on port 5555 for the response. In our JavaScript code, we included a image tag that tells it to go the location, which is our local host this time, and in port 5555. However, the cookie information is passed to the location while Elgg request for the "image". Therefore, we have recieved the cookie infomation on the attack's end.
 
 
 ### Task 4:
@@ -84,7 +84,7 @@ Then I made sure Samy and Alice are not friends. (To save a little space, I have
 Next I searched for [Samy as Alice](Task4-1-3.png) and viewed [Samy's profile](Task4-1-4.PNG). When I go back to view Alice's friend list:
 
 ![success](Task4-1-5.PNG)
-We can see that Samy is a friend of Alice but Alice never had that request. When I logged in as Samy, I could see that Samy and Alice had made Samy a friend. Since we never said in the code that Samy should not add himeself as a friend, it happened when we viewed Samy's profile as Samy.
+We can see that Samy is a friend of Alice but Alice never had that request. When I logged in as Samy, I could see that Samy and Alice had made Samy a friend. Since we never said in the code that Samy should not add himself as a friend, it happened when we viewed Samy's profile as Samy.
 
 ##### Task 4.2:
 This time, we are trying to see if Editor mode is going to launch the attack. Before I tried this, I deleted everyone as a friend and the original code. As we can see, [no one](Task4-2-1.PNG) is Samy's friend and [no one](Task4-2-2.PNG) has made friend with Samy. Then I included the same code in the editor mode:
@@ -180,13 +180,13 @@ After writing the code in Samy's profile, I logged in as Alice and made sure tha
 I could see that Samy is my hero is located on Alice's profile even though all Alice did was view Samy's profile page. Thus, we can conclude that our attack was successful.
 
 ##### Task 5.2:
-We need line (1) to ensure that Samy is not attacking himself. In the last task, we can see that Samy has friended himself and that is not an normal action a user can complete. In this case, since the worm is not self-propagating yet, if Samy attacks himself, it would remove his worm that he wrote, so anyone who comes after the attack will not be affected. Furthormore, you would not want to attack yourself anyways. In conclusion, line (1) will check the user's guid to make sure it is not Samy, to guarantee that Samy is not attacking himself. Then I removed the line to try the attack. First, I double checked to make sure [Samy](Task5-2-1.PNG) is not displaying the message. Then I updated the code in his profile:
+We need line (1) to ensure that Samy is not attacking himself. In the last task, we can see that Samy has friended himself and that is not an normal action a user can complete. In this case, since the worm is not self-propagating yet, if Samy attacks himself, it would remove his worm that he wrote, so anyone who comes after the attack will not be affected. Furthermore, you would not want to attack yourself anyways. In conclusion, line (1) will check the user's guid to make sure it is not Samy, to guarantee that Samy is not attacking himself. Then I removed the line to try the attack. First, I double checked to make sure [Samy](Task5-2-1.PNG) is not displaying the message. Then I updated the code in his profile:
 ![attack](Task5-2-2.PNG)
 
 When I saved it, [nothing happened](Task5-2-3.PNG); however, if I refresh the page, Samy's my hero is on Samy's profile:
 ![success](Task5-2-4.PNG)
 ![outcome](Task5-2-5.PNG)
-When I go into his profile, I can see that the code has been updated to the message, which means no one after that attack will be affected when they view Samy's page. Therefore, we neeed to check to make sure Samy is not attacking himself.
+When I go into his profile, I can see that the code has been updated to the message, which means no one after that attack will be affected when they view Samy's page. Therefore, we need to check to make sure Samy is not attacking himself.
 
 ### Task 6:
 In this task, we are making a Samy worm. It includes all of the previous tasks and it copies itself to whoever views it. Which means it will spread itself more rapidly. This time, the skeleton of the code is provided, where it contains the headerTag, the tailTag, and copies every code to the body again. Regarding to the actual adding friend and updating about me, I am just copying what I have done before and duplicate the action where I want to have two GET request:
@@ -251,4 +251,4 @@ When Charlie comes back to his profile, the worm has been injected into his prof
 Lastly, I logged in as Samy and checked who has friended him:
 ![success](Task6-10.PNG)
 
-As we can see, although Charlie has never viewed Samy's page, because he viewed Alice, who has been affected with the worm, he will also be affected. Additionally, I have tried the link approach and it will work similarly. However, instead of storing the javascript code in About me, I will host that code on some website and use the About me to fetch that information. Overall, the worm seems very contagious since everyone without some kind of javascript blocker will be affected as soon as they view someone who has been affected by the worm. However, this worm has been interesting to study and pretty fun to do.
+As we can see, although Charlie has never viewed Samy's page, because he viewed Alice, who has been affected with the worm, he will also be affected. Additionally, I have tried the link approach and it will work similarly. However, instead of storing the JavaScript code in About me, I will host that code on some website and use the About me to fetch that information. Overall, the worm seems very contagious since everyone without some kind of JavaScript blocker will be affected as soon as they view someone who has been affected by the worm. However, this worm has been interesting to study and pretty fun to do.
