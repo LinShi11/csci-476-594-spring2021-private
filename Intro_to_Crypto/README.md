@@ -7,16 +7,20 @@
 
 ### Task 1:
 **What is cryptography?**
+
 Cryptography is the science of secure communication techniques that will allow the information/data to be sent between a sender and a receiver and the unintended receiver have no access to the information. Cryptography will use some kind of key to encrypt the message into a unreadable form unless one has the key to decrypt the message.
 
 **What problems does it solve?**
+
 Cryptography will ensure the message/data is only between the sender and the intended receiver. Since the message has been transformed into some unreadable combination, they would not be able to read the information unless they have the key. This was widely used during war time as well as today on internet while data are being transferred everywhere.
 
 **What potential issues are there in using and designing cryptography?**
+
 In the earlier days, since cryptography is only shifting the letter by some space, one could brute force to find the answer. Additionally, the English language will contain some letters or phrases that will repeat more often than other, such as "th", "e", "the", and etc.. Therefore, one could use frequency analysis to find what has occurred more often and decrypt the message a little at a time. In fact, that is what we are doing for Task 2. Overall, many cryptography ideas are not perfect and it contains some logic, the only perfect cryptography is to use a key as long as your message every time where there are no patterns to observe. However, this is too expensive to accomplish every time.
 
 **What are some of the big, important ideas in cryptography?**
-Cryptography is important to ensure the message are secret among the sender and receiver(s). The process contains the encrypt program, decrypt program, encrypt key, decrypt key, the plaintext message, and the ciphertext. When the sender is sending the informaiton, he/she will use the encrypt key and encrypt program to modify the plaintext. Then the modified text, ciphertext, will be send to the intended receiver, who will use the decrypt key and decrypt program to get the original message. When the receiver finds an error, he/she will know the message has been changed by some unintended viewer. In most of the private sessions, the encrypt key and decrypt key are the same. However, there are some public sessions, where the public key is avaailbe for everyone, and anyone could send the receiver messages using the public key and only the private key could be used to decrypt the message. Today, both public and private key communication is used everyday.
+
+Cryptography is important to ensure the message are secret among the sender and receiver(s). The process contains the encrypt program, decrypt program, encrypt key, decrypt key, the plaintext message, and the ciphertext. When the sender is sending the information, he/she will use the encrypt key and encrypt program to modify the plaintext. Then the modified text, ciphertext, will be send to the intended receiver, who will use the decrypt key and decrypt program to get the original message. When the receiver finds an error, he/she will know the message has been changed by some unintended viewer. In most of the private sessions, the encrypt key and decrypt key are the same. However, there are some public sessions, where the public key is available for everyone, and anyone could send the receiver messages using the public key and only the private key could be used to decrypt the message. Today, both public and private key communication is used everyday.
 
 ### Task 2:
 In this task, we are trying to decrypt the message. Since we know this is a monoalphabetic substitution cipher, which means it went in and replaced the each letter with some other letter. We will use the frequency analysis to get started:
