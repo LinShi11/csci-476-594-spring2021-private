@@ -1,8 +1,8 @@
-## Lab05
+## Intro to Crypto
 ###### Lin Shi (n92s773)
 ###### linshi1768@gmail.com
 ###### CSCI 476
-###### March 23, 2021
+###### March 30, 2021
 <br>
 
 ### Task 1:
@@ -20,10 +20,11 @@ In the earlier days, since cryptography is only shifting the letter by some spac
 
 **What are some of the big, important ideas in cryptography?**
 
-Cryptography is important to ensure the message are secret among the sender and receiver(s). The process contains the encrypt program, decrypt program, encrypt key, decrypt key, the plaintext message, and the ciphertext. When the sender is sending the information, he/she will use the encrypt key and encrypt program to modify the plaintext. Then the modified text, ciphertext, will be send to the intended receiver, who will use the decrypt key and decrypt program to get the original message. When the receiver finds an error, he/she will know the message has been changed by some unintended viewer. In most of the private sessions, the encrypt key and decrypt key are the same. However, there are some public sessions, where the public key is available for everyone, and anyone could send the receiver messages using the public key and only the private key could be used to decrypt the message. Today, both public and private key communication is used everyday.
+Cryptography is important to ensure the message are secret among the sender and receiver(s). The process contains the encrypt program, decrypt program, encrypt key, decrypt key, the plaintext message, and the ciphertext. When the sender is sending the information, he/she will use the encrypt key and encrypt program to modify the plaintext. Then the modified text, ciphertext, will be send to the intended receiver, who will use the decrypt key and decrypt program to get the original message. When the receiver finds an error, he/she will know the message has been changed by some unintended viewe
+. In most of the private sessions, the encrypt key and decrypt key are the same. However, there are some public sessions, where the public key is available for everyone, and anyone could send the receiver messages using the public key and only the private key could be used to decrypt the message. Today, both public and private key communication is used everyday.
 
 ### Task 2:
-In this task, we are trying to decrypt the message. Since we know this is a monoalphabetic substitution cipher, which means it went in and replaced the each letter with some other letter. We will use the frequency analysis to get started:
+In this task, we are trying to decrypt the ciphertext. Since we know this is a monoalphabetic substitution cipher, which means the cipher went in and replaced the each letter with some other letter. We will use the frequency analysis to get started:
 ```
 ...
 top 10 trigrams:
@@ -130,7 +131,7 @@ NEVER ohVE SOvEONE REvOTE AjjESS TO rOzR jOvazTER EVEN hc THEr SAr THErRE jAii
 ```
 [03/31/21]seed@VM:~/.../files$ tr 'vjazr' 'MCPUY' <output6.txt> output7.txt
 ```
-After all the replacement, we can read some of the sentences, NEVER <something> SOMEONE REMOTE ACCESS TO YOUR COMPUTER ... So I decided to replace all v, j, a, z, and r with the appropriate letters to make up that sentence. [Here](output7.txt) is the full output.
+After all the replacement, we can read some of the sentences, NEVER something SOMEONE REMOTE ACCESS TO YOUR COMPUTER ... So I decided to replace all v, j, a, z, and r with the appropriate letters to make up that sentence. [Here](output7.txt) is the full output.
 
 ```
 NEVER PAY ONihNE EwTORThON lEMANlS hT dUST ENCOURAoES MORE RANSOMWARE ATTACkS
@@ -138,7 +139,7 @@ NEVER PAY ONihNE EwTORThON lEMANlS hT dUST ENCOURAoES MORE RANSOMWARE ATTACkS
 ```
 [03/31/21]seed@VM:~/.../files$ tr 'ihwlok' 'LIXDGK' <output7.txt> output8.txt
 ```
-Additionally, I found another sentence, which I assume, with the help of [mypixwords.com](https://www.mypixwords.com/answers/), to be NEVER PAY ONLINE EXTORTION DEMANDS <something> <something> ENCOURAGES MORE RANSOMWARE ATTACKS. Once again, I replaced the necessary letters. [Here](output8.txt) is the full output.  
+Additionally, I found another sentence, which I assume, with the help of [mypixwords.com](https://www.mypixwords.com/answers/), to be NEVER PAY ONLINE EXTORTION DEMANDS something something ENCOURAGES MORE RANSOMWARE ATTACKS. Once again, I replaced the necessary letters. [Here](output8.txt) is the full output.  
 
 ```
 IN THE PAST cEW YEARS UNIVERSITIES LIKE EVERYONE ELSE HAVE sECOME INCREASINGLY
