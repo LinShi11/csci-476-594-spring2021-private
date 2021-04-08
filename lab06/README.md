@@ -95,6 +95,8 @@ iv =000102030405060708090A0B0C0D0E0F
 [04/08/21]seed@VM:~/.../files$ bless penCbc.bmp
 ```
 ![](Task2_cbc2.PNG)
+
+ECB version:
 ```
 [04/08/21]seed@VM:~/.../files$ openssl enc -aes-128-ecb -e -in penguin.bmp -out penEcb.bmp -K 00112233445566778899AABBCCDDEEFF -iv 000102030405060708090A0B0C0D0E0F -p
 warning: iv not used by this cipher
