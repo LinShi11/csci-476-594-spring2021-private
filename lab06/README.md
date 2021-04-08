@@ -305,26 +305,26 @@ In OFB, we have lost just one byte, the byte that we modify. Therefore, changing
 ### Task 5:
 In this task, we are looking at the importance of changing IVs:
 ```
-<pre>[04/08/21]<font color="#4E9A06"><b>seed@VM</b></font>:<font color="#3465A4"><b>~/.../Task3</b></font>$ nano secret.plain
-[04/08/21]<font color="#4E9A06"><b>seed@VM</b></font>:<font color="#3465A4"><b>~/.../Task3</b></font>$ openssl enc -aes-128-cbc -e -in secret.plain -out Task5_1.cbc -K 00112233445566778899AABBCCDDEEFF -iv 000102030405060708090A0B0C0D0E0F -p
+[04/08/21]seed@VM:~/.../Task3$ nano secret.plain
+[04/08/21]seed@VM:~/.../Task3$ openssl enc -aes-128-cbc -e -in secret.plain -out Task5_1.cbc -K 00112233445566778899AABBCCDDEEFF -iv 000102030405060708090A0B0C0D0E0F -p
 salt=2013000000000000
 key=00112233445566778899AABBCCDDEEFF
 iv =000102030405060708090A0B0C0D0E0F
-[04/08/21]<font color="#4E9A06"><b>seed@VM</b></font>:<font color="#3465A4"><b>~/.../Task3</b></font>$ openssl enc -aes-128-cbc -e -in secret.plain -out Task5_2.cbc -K 00112233445566778899AABBCCDDEEFF -iv 0F0E0D0C0B0A09080706050403020100 -p
+[04/08/21]seed@VM:~/.../Task3$  openssl enc -aes-128-cbc -e -in secret.plain -out Task5_2.cbc -K 00112233445566778899AABBCCDDEEFF -iv 0F0E0D0C0B0A09080706050403020100 -p
 salt=2013000000000000
 key=00112233445566778899AABBCCDDEEFF
 iv =0F0E0D0C0B0A09080706050403020100
+[04/08/21]seed@VM:~/.../Task3$ vbindiff Task5_1.cbc Task5_2.cbc
 
-[04/08/21]<font color="#4E9A06"><b>seed@VM</b></font>:<font color="#3465A4"><b>~/.../Task3</b></font>$ vbindiff Task5_1.cbc Task5_2.cbc
 ```
 ![](Task5_1.PNG)
 We encrypted the secret text with CBC twice using different IVs and store the information separately. As we can see the whole message has been different by using different IVs. Then I did one with the same IV as the first attempt and compared results:
 ```
-[04/08/21]<font color="#4E9A06"><b>seed@VM</b></font>:<font color="#3465A4"><b>~/.../Task3</b></font>$ openssl enc -aes-128-cbc -e -in secret.plain -out Task5_3.cbc -K 00112233445566778899AABBCCDDEEFF -iv 000102030405060708090A0B0C0D0E0F -p
+[04/08/21]seed@VM:~/.../Task3$ openssl enc -aes-128-cbc -e -in secret.plain -out Task5_3.cbc -K 00112233445566778899AABBCCDDEEFF -iv 000102030405060708090A0B0C0D0E0F -p
 salt=2013000000000000
 key=00112233445566778899AABBCCDDEEFF
 iv =000102030405060708090A0B0C0D0E0F
-[04/08/21]<font color="#4E9A06"><b>seed@VM</b></font>:<font color="#3465A4"><b>~/.../Task3</b></font>$ vbindiff Task5_1.cbc Task5_3.cbc</pre>
+[04/08/21]seed@VM:~/.../Task3$ vbindiff Task5_1.cbc Task5_3.cbc
 ```
 ![](Task5_2.PNG)
-As we can see the encrypted version has been the same. Thus, we can see the importance of changing IVs when encrypting since it could be unsafe if we are using the same IVs over and over. 
+As we can see the encrypted version has been the same. Thus, we can see the importance of changing IVs when encrypting since it could be unsafe if we are using the same IVs over and over.
