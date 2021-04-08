@@ -67,6 +67,7 @@ iv =000102030405060708090A0B0C0D0E0F
 [04/08/21]seed@VM:~/.../files$ bless cbc.bmp
 ```
 ![](Task2_cbc.PNG)
+
 As we can see everything to the picture has been encrypted. Then, we do the same for ECB:
 
 ```
@@ -77,6 +78,7 @@ key=00112233445566778899AABBCCDDEEFF
 [04/08/21]seed@VM:~/.../files$ bless ecb.bmp
 ```
 ![](Task2_ecb.PNG)
+
 This time, we can see some outlines to the picture that we encrypted. Therefore, we conclude that CBC is a better encryption at least for the bmp images, since there will not even have any outlines for others to see.
 
 ##### Task 2.2:
@@ -101,6 +103,7 @@ key=00112233445566778899AABBCCDDEEFF
 [04/08/21]seed@VM:~/.../files$ bless penEcb.bmp
 ```
 ![](Task2_ecb2.PNG)
+
 Once again, I used head to retrieve the header. Then I encrypt the whole image and change the header of the newly modified image back to the original. Also, in the ECB image, we can see the outline of the original penguin. However, in the CBC, we cannot.
 
 ### Task 3:
@@ -231,6 +234,7 @@ key=00112233445566778899AABBCCDDEEFF
 [04/08/21]seed@VM:~/.../Task3$ vbindiff Task42.recover message.plain
 ```
 ![](Task4_2.PNG)
+
 As I excepted, we have lost 16 bytes in total. However, I thought it was going to lose just 8 bytes. However, assuming that 20 is some kind of filler, the whole 16 bytes has been altered. Overall, we have recovered everything else.
 
 ##### Task 4.3:
@@ -253,6 +257,7 @@ iv =000102030405060708090A0B0C0D0E0F
 [04/08/21]seed@VM:~/.../Task3$ vbindiff Task43.recover message.plain
 ```
 ![](Task4_3.PNG)
+
 This time, we lost 17 bytes. We changed a filler(20) and it modified the 16 bytes prior to this filler. On the other hand, we recovered all other messages.
 
 
@@ -276,6 +281,7 @@ iv =000102030405060708090A0B0C0D0E0F
 [04/08/21]seed@VM:~/.../Task3$ vbindiff Task44.recover message.plain
 ```
 ![](Task4_4.PNG)
+
 In CFB, we lost the byte that we modify as well as the next set of 16 bytes. Since we changed the filled, it will altered the next 16 bytes. Aside from that, we have recovered everything else.
 
 ##### Task 4.5:
@@ -299,6 +305,7 @@ iv =000102030405060708090A0B0C0D0E0F
 [04/08/21]seed@VM:~/.../Task3$ vbindiff Task45.recover message.plain
 ```
 ![](Task4_5.png)
+
 In OFB, we have lost just one byte, the byte that we modify. Therefore, changing some filler would not affect OFB.
 
 
@@ -318,6 +325,7 @@ iv =0F0E0D0C0B0A09080706050403020100
 
 ```
 ![](Task5_1.PNG)
+
 We encrypted the secret text with CBC twice using different IVs and store the information separately. As we can see the whole message has been different by using different IVs. Then I did one with the same IV as the first attempt and compared results:
 ```
 [04/08/21]seed@VM:~/.../Task3$ openssl enc -aes-128-cbc -e -in secret.plain -out Task5_3.cbc -K 00112233445566778899AABBCCDDEEFF -iv 000102030405060708090A0B0C0D0E0F -p
@@ -327,4 +335,5 @@ iv =000102030405060708090A0B0C0D0E0F
 [04/08/21]seed@VM:~/.../Task3$ vbindiff Task5_1.cbc Task5_3.cbc
 ```
 ![](Task5_2.PNG)
+
 As we can see the encrypted version has been the same. Thus, we can see the importance of changing IVs when encrypting since it could be unsafe if we are using the same IVs over and over.
