@@ -306,7 +306,7 @@ key=00112233445566778899AABBCCDDEEFF
 iv =000102030405060708090A0B0C0D0E0F
 [04/08/21]seed@VM:~/.../Task3$ vbindiff Task45.recover message.plain
 ```
-![](Task4_5.png)
+![](Task4_5.PNG)
 
 In OFB, we have lost just one byte, the byte that we modify. Therefore, changing some filler would not affect OFB.
 
