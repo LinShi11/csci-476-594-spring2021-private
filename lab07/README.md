@@ -122,7 +122,7 @@ f12198b5019905757ade4dee23145fb0  out2-5.bin
 This time, I have added a prefix with the length of 64. When I observe the new file, the 00 are not there. Therefore, if the prefix is 64 bytes long, it will just use that for the prefix without any modification. Additionally, the diff command will give a little extra information on the difference among the two files. On the other hand, its md5sums are the same.
 
 ##### Task 1.4:
-The data are not completely different; however they are difference to a degree. 7C(|) is FC(.), 43(C) is C3(.), CC(.) is 4C(L), 3B(;) is BB(.), 52(R) is D2(.), 83(.) is 03(.), A1(.) is A2(.) 5A(Z) is DA(.). In total, we have 8 differences and with the exception of A1 to A2, they all vary in 128 or -128. If you would take C3-43, the difference is 80, which is 128 in decimal. Same thing applies to all other but A1 to A2. Therefore, since the data (128 bytes) are generated, it might include some differences with a offset of 128. However, if we do the md5sum of them, they are the same.
+The data are not completely different; however they are difference to a degree. 7C(|) is FC(.), 43(C) is C3(.), CC(.) is 4C(L), 3B(;) is BB(.), 52(R) is D2(.), 83(.) is 03(.), A1(.) is A2(.). In total, we have 8 differences, with C3 repeating twice, and with the exception of A1 to A2, they all vary in 128 or -128. If you would take C3-43, the difference is 80, which is 128 in decimal. Same thing applies to all other but A1 to A2. Therefore, since the data (128 bytes) are generated, it might include some differences with a offset of 128. However, if we do the md5sum of them, they are the same.
 
 
 ### Task 2:
@@ -175,7 +175,7 @@ cc6956d0f7ca83109fd1c5026edc9f39  out2-2.bin
 ```
 ![](task2-1.PNG)
 
-Up to this point, we are doing the same thing as above. Next, we are going to add the suffix and concatenating it:
+Up to this point, we are doing the same thing as above. Next, we are going to add the suffix and concatenate it:
 
 ```
 [04/15/21]seed@VM:~/.../lab07$ echo -n "end" > suffix.txt
@@ -183,23 +183,6 @@ Up to this point, we are doing the same thing as above. Next, we are going to ad
 [04/15/21]seed@VM:~/.../lab07$ cat out2-2.bin suffix.txt > n.bin
 [04/15/21]seed@VM:~/.../lab07$ diff m.bin n.bin
 Binary files m.bin and n.bin differ
-[04/15/21]seed@VM:~/.../lab07$ m5sum m.bin
-
-Command 'm5sum' not found, did you mean:
-
-  command 'md5sum' from deb coreutils (8.30-3ubuntu2)
-  command 'mdsum' from deb ucommon-utils (7.0.0-16ubuntu2)
-
-Try: sudo apt install <deb name>
-
-[04/15/21]seed@VM:~/.../lab07$ md5dum m.bin
-
-Command 'md5dum' not found, did you mean:
-
-  command 'md5sum' from deb coreutils (8.30-3ubuntu2)
-
-Try: sudo apt install <deb name>
-
 [04/15/21]seed@VM:~/.../lab07$ md5sum m.bin
 0fcf4f1db00bb65883d4ad233d600fd9  m.bin
 [04/15/21]seed@VM:~/.../lab07$ md5sum n.bin
@@ -238,7 +221,7 @@ Binary files m.bin and n.bin differ
 ```
 ![](task2-2.PNG)
 
-As we can see, everything has stayed the same, the only difference is within the data that we generate (and they are all offsetting by 128). Therefore, we can conclude that adding a suffix does not change it; thus, the property holds with md5.
+As we can see, everything has stayed the same, the only difference is within the data that we generate (and they are all offsetting by 128). In face, since our suffix is so small, we can see that it is the 656e64 bytes in the bottom. Therefore, we can conclude that adding a suffix does not change it; thus, the property holds with md5. 
 
 ### Task 3:
 In this task, we are generating two executables files with the same md5 hash, I have cut the xxd of task3.out to just the data that we would like to see:
