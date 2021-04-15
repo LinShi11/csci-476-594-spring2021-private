@@ -221,7 +221,7 @@ Binary files m.bin and n.bin differ
 ```
 ![](task2-2.PNG)
 
-As we can see, everything has stayed the same, the only difference is within the data that we generate (and they are all offsetting by 128). In face, since our suffix is so small, we can see that it is the 656e64 bytes in the bottom. Therefore, we can conclude that adding a suffix does not change it; thus, the property holds with md5. 
+As we can see, everything has stayed the same, the only difference is within the data that we generate (and they are all offsetting by 128). In face, since our suffix is so small, we can see that it is the 656e64 bytes in the bottom. Therefore, we can conclude that adding a suffix does not change it; thus, the property holds with md5.
 
 ### Task 3:
 In this task, we are generating two executables files with the same md5 hash, I have cut the xxd of task3.out to just the data that we would like to see:
@@ -280,7 +280,7 @@ Running time: 3.27924 s
 Binary files program1.out and program2.out differ
 [04/15/21]seed@VM:~/.../lab07$ vbindiff program1.out program2.out
 ```
-As we can see, I have compiled the program, use xxd to find the location, fix the prefix and suffix. Then I hashed the prefix and concatenated it with others to create two different executables. When I executed it, the result is the same. Additionally, the md5sum of them are the same.
+As we can see, I have compiled the program, use xxd to find the location, fix the prefix and suffix. Then I hashed the prefix and concatenated it with others to create two different executables. When I executed it, the result is the same. Additionally, the md5sum of them are the same. The only difference is the binary files and when I looked at it with vbindiff, it was not showing anything new.
 
 ### Task 4:
 In this task, we would like to test the same thing out again but have the program behave differently. I will be using benign_evil.c file given to us. Based on the example, the version will be in the order of prefix, first 128 bytes, the middle section, the other bytes to compare with, and the suffix. The only difference between the two version are the first 128 bytes, which will be used to compare with the other bytes. If we call the first 128 P and the comparable P', since P and P' are equal, they should do one thing. Then we are going to substitute P with Q, which is different. Since Q and P' are different, they will do another part of the program.
