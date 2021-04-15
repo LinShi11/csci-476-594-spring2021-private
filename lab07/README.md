@@ -119,10 +119,10 @@ f12198b5019905757ade4dee23145fb0  out2-5.bin
 ```
 ![](task1-3.PNG)
 
-This time, I have added a prefix with the length of 64. When I observe the new file, the 00 are not there. Therefore, if the prefix is 64 bytes long, it will just use that for the prefix without any modification. Additionally, the diff command will give a little extra information on the difference among the two files. On the other hand, its md5sums are the same. 
+This time, I have added a prefix with the length of 64. When I observe the new file, the 00 are not there. Therefore, if the prefix is 64 bytes long, it will just use that for the prefix without any modification. Additionally, the diff command will give a little extra information on the difference among the two files. On the other hand, its md5sums are the same.
 
 ##### Task 1.4:
-The data are not completely different; however they are different to a degree. 7C(|) is FC(.), 43(C) is C3(.), CC(.) is 4C(L), 3B(;) is BB(.), 52(R) is D2(.), 83(.) is 03(.), A1(.) is A2(.) 5A(Z) is DA(.). In total, we have 8 differences and with the exception of A1 to A2, they all vary in 128 or -128. Which is all the differences among the two files. If you would take C3-43, the difference is 80, which is 128 in decimal. Same thing applies to FC-7C. Therefore, since the data (128 bytes) are generated, it might include some differences with a offset of 128. However, if we do the md5sum of them, they are the same.
+The data are not completely different; however they are difference to a degree. 7C(|) is FC(.), 43(C) is C3(.), CC(.) is 4C(L), 3B(;) is BB(.), 52(R) is D2(.), 83(.) is 03(.), A1(.) is A2(.) 5A(Z) is DA(.). In total, we have 8 differences and with the exception of A1 to A2, they all vary in 128 or -128. If you would take C3-43, the difference is 80, which is 128 in decimal. Same thing applies to all other but A1 to A2. Therefore, since the data (128 bytes) are generated, it might include some differences with a offset of 128. However, if we do the md5sum of them, they are the same.
 
 
 ### Task 2:
