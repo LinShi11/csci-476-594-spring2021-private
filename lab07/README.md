@@ -60,7 +60,7 @@ cfe1fb6bf48184995be35ac749138921  out2.bin
 As you can see, I first added some random information in the prefix. Then I did a md5 hash of the prefix. When I checked for the difference among the two files, I can see it saying the two files are different. However, its md5sum are the same. Then I used the vbindiff to look for the differences and the difference is only a few bytes.
 
 ##### Task 1.2:
-As seen in the previous image for difference, when we do not have 64 bytes for the prefix, it is padded with 00 all the way up to 40, which is 64 in decimal. Therefore, we can conclude that if the prefix is not at least 64 bytes long, it will be padded until it is 64 bytes long.
+As seen in the previous image for difference, when we do not have 64 bytes for the prefix, it is padded with 00 all the way up to 40, which is 64 in decimal. Therefore, we can conclude that if the prefix is not at least 64 bytes long, it will be padded until it is 64 bytes long. Same idea would apply to any multiple of 64.
 
 ##### Task 1.3:
 For this task, we are observing what would happen if the prefix is 64 bytes long.
@@ -359,4 +359,4 @@ Executing malicious code...
 Binary files exec1.out and exec2.out differ
 [04/15/21]seed@VM:~/.../lab07$ vbindiff exec1.out exec2.out
 ```
-As we can see, I first found the prefix, then I used the hash to generate P. Next, I will find the P' as 1-1.out. Then I will find the middle section to use for both version. Lastly, I found the suffix that we use for both version. In the end, I will concatenate them together as two different executables and as we can see the response are different as well. Overall, as what I talked about, since 1.out(P) and 2.out(Q) are different and 1-1.out(P') are from P, the first executables will run the one result while the second one with run the other result. When I did the same comparison as last few tasks, I can see that the sum of exec1.out and exec2.out are the same. The only difference is still in the binary. When I looked at it with vbindiff, it is clear that they are variance of 128 again. 
+As we can see, I first found the prefix, then I used the hash to generate P. Next, I will find the P' as 1-1.out. Then I will find the middle section to use for both version. Lastly, I found the suffix that we use for both version. In the end, I will concatenate them together as two different executables and as we can see the response are different as well. Overall, as what I talked about, since 1.out(P) and 2.out(Q) are different and 1-1.out(P') are from P, the first executables will run the one result while the second one with run the other result. When I did the same comparison as last few tasks, I can see that the sum of exec1.out and exec2.out are the same. The only difference is still in the binary. When I looked at it with vbindiff, it is clear that they are variance of 128 again.
