@@ -46,7 +46,7 @@ int main() {
     return 0;
 }
 ```
-Based on the example code given, we are going to modify it slightly. First, we need to initialize the space for all the BN_new(). Therefore, we have necessary key components p, q, e, n, and d. Within the five, p, q, and e are given, n is just the product of p and q; therefore, we will use pTwo, qTwo to ensure the memory spot of p and q will not be messed up by the multiplication. Then, we plug the neccessary information in the appropriate variables. Next, we calculate n by using pTwo times qTwo. For demonstration purposes, we will print the information out. Lastly, we will use the BN_mod_inverse to find d.
+Based on the example code given, we are going to modify it slightly. First, we need to initialize the space with all the BN_new(). Therefore, we have the necessary key components p, q, e, n, and d. Within the five, p, q, and e are given, n is just the product of p and q; therefore, we will use pTwo, qTwo to ensure the memory slot of p and q are not be messed with by the multiplication. Then, we plug the necessary information in the appropriate variables. Next, we calculate n by using pTwo times qTwo. For demonstration purposes, we will print the information out. Lastly, we will use the BN_mod_inverse to find d.
 
 ```
 [04/21/21]seed@VM:~/.../lab08$ nano bigNum.c
@@ -58,7 +58,7 @@ e:  0D88C3
 n:  E103ABD94892E3E74AFD724BF28E78348D52298BD687C44DEB3A81065A7981A4
 private key d is  3587A24598E5F2A21DB007D89D18CC50ABA5075BA19A33890FE7C28A9B496AEB
 ```
-As we can see, I first created the c program with all the code above. Then I complied it with the -lcrypto flag. Then I ran the executable and the information is present.
+As we can see, I first created the c program with all the code above. Then I complied it with the -lcrypto flag. Then I ran the executable and the information is present. The private key, d, is 3587A24598E5F2A21DB007D89D18CC50ABA5075BA19A33890FE7C28A9B496AEB.
 
 ### Task 2:
 In this task, we are trying to show the encryption and decryption process using the keys that we have.
