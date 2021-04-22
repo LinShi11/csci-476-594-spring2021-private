@@ -46,7 +46,7 @@ int main() {
     return 0;
 }
 ```
-Based on the example code given, we are going to modify it slightly. First, we need to initialize the space with all the BN_new(). Therefore, we have the necessary key components p, q, e, n, and d. Within the five, p, q, and e are given, n is just the product of p and q; therefore, we will use pTwo, qTwo to ensure the memory slot of p and q are not be messed with by the multiplication. Then, we plug the necessary information in the appropriate variables. Next, we calculate n by using pTwo times qTwo. For demonstration purposes, we will print the information out. Lastly, we will use the BN_mod_inverse to find d.
+Based on the example code given, we are going to modify it slightly. First, we need to initialize the space with all the BN_new(). Therefore, we have the necessary key components p, q, e, n, and d. Within the five, p, q, and e are given, n is just the product of p and q. Then, we plug the necessary information in the appropriate variables. Next, we calculate n by using pTwo times qTwo. Where pTwo is p-1 and qTwo is q-1. For demonstration purposes, we will print the information out. Lastly, we will use the BN_mod_inverse to find d.
 
 ```
 [04/21/21]seed@VM:~/.../lab08$ nano bigNum.c
